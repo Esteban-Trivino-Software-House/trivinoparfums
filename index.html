@@ -222,6 +222,55 @@
     .scroll-top-btn.visible{opacity:1;pointer-events:auto}
     .scroll-top-btn:hover{transform:translateY(-3px)}
 
+    /* ── CHAT WIDGET ── */
+    .chat-fab{position:fixed;bottom:28px;left:20px;z-index:150;display:flex;align-items:center;gap:10px;background:var(--dark3);border:1px solid var(--border-light);border-radius:50px;padding:10px 18px 10px 14px;cursor:pointer;box-shadow:0 4px 24px rgba(0,0,0,.5);transition:border-color .2s,transform .2s;font-family:'DM Sans',sans-serif}
+    .chat-fab:hover{border-color:var(--gold);transform:translateY(-2px)}
+    .chat-fab-icon{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-light));display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0}
+    .chat-fab-text{font-size:.78rem;font-weight:500;color:var(--text);line-height:1.2}
+    .chat-fab-sub{font-size:.65rem;color:var(--text-muted);display:block}
+    .chat-fab-dot{position:absolute;top:6px;left:38px;width:9px;height:9px;border-radius:50%;background:#25d366;border:2px solid var(--dark3)}
+
+    .chat-panel{position:fixed;bottom:0;left:0;width:min(400px,100vw);height:min(600px,90vh);background:var(--dark2);border:1px solid var(--border);border-radius:0 20px 0 0;z-index:400;display:flex;flex-direction:column;transform:translateY(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);box-shadow:0 -8px 60px rgba(0,0,0,.6)}
+    .chat-panel.open{transform:translateY(0)}
+    .chat-panel-header{display:flex;align-items:center;gap:12px;padding:16px 18px;border-bottom:1px solid var(--border);flex-shrink:0;background:var(--dark3);border-radius:0 20px 0 0}
+    .chat-panel-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-light));display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+    .chat-panel-info{flex:1}
+    .chat-panel-name{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;color:var(--text)}
+    .chat-panel-status{font-size:.65rem;color:#25d366;display:flex;align-items:center;gap:5px}
+    .chat-panel-status::before{content:'';width:6px;height:6px;border-radius:50%;background:#25d366;display:block}
+    .chat-close-btn{background:var(--dark4);border:1px solid var(--border);color:var(--text-muted);width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:.85rem;display:flex;align-items:center;justify-content:center;transition:border-color .2s;flex-shrink:0}
+    .chat-close-btn:hover{border-color:var(--gold)}
+
+    .chat-messages{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px;scroll-behavior:smooth}
+    .chat-messages::-webkit-scrollbar{width:3px}
+    .chat-messages::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+    .chat-msg{max-width:85%;display:flex;flex-direction:column;gap:4px}
+    .chat-msg.user{align-self:flex-end;align-items:flex-end}
+    .chat-msg.bot{align-self:flex-start;align-items:flex-start}
+    .chat-bubble{padding:10px 14px;border-radius:16px;font-family:'DM Sans',sans-serif;font-size:.82rem;line-height:1.55;word-break:break-word}
+    .chat-msg.user .chat-bubble{background:var(--gold);color:var(--dark);border-radius:16px 16px 4px 16px}
+    .chat-msg.bot .chat-bubble{background:var(--dark3);border:1px solid var(--border);color:var(--text);border-radius:16px 16px 16px 4px}
+    .chat-bubble strong{color:var(--gold-light)}
+    .chat-product-chip{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--border-light);border-radius:8px;padding:8px 12px;margin-top:6px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:.75rem;color:var(--gold);background:var(--dark4);transition:border-color .2s,background .2s;text-decoration:none;width:100%;box-sizing:border-box}
+    .chat-product-chip:hover{border-color:var(--gold);background:var(--gold-dim)}
+    .chat-product-chip img{width:36px;height:36px;object-fit:contain;border-radius:6px;background:#111;flex-shrink:0}
+    .chat-product-info{display:flex;flex-direction:column;gap:1px;min-width:0}
+    .chat-product-name{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--text);font-weight:500}
+    .chat-product-price{color:var(--gold);font-size:.7rem}
+    .chat-typing{display:flex;gap:4px;align-items:center;padding:10px 14px}
+    .chat-typing span{width:7px;height:7px;border-radius:50%;background:var(--text-dim);animation:typingDot 1.2s infinite}
+    .chat-typing span:nth-child(2){animation-delay:.2s}
+    .chat-typing span:nth-child(3){animation-delay:.4s}
+    @keyframes typingDot{0%,60%,100%{opacity:.3;transform:translateY(0)}30%{opacity:1;transform:translateY(-4px)}}
+
+    .chat-input-area{padding:12px 14px;border-top:1px solid var(--border);display:flex;gap:8px;flex-shrink:0;background:var(--dark3)}
+    .chat-input{flex:1;background:var(--dark4);border:1px solid var(--border);color:var(--text);padding:10px 14px;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:.82rem;outline:none;resize:none;max-height:100px;transition:border-color .2s;line-height:1.4}
+    .chat-input::placeholder{color:var(--text-dim)}
+    .chat-input:focus{border-color:rgba(201,168,76,.4)}
+    .chat-send-btn{background:var(--gold);border:none;color:var(--dark);width:40px;height:40px;border-radius:10px;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:background .2s;flex-shrink:0;align-self:flex-end}
+    .chat-send-btn:hover{background:var(--gold-light)}
+    .chat-send-btn:disabled{background:var(--border);color:var(--text-dim);cursor:not-allowed}
+
     /* ── TOAST ── */
     .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--dark3);border:1px solid var(--gold);color:var(--text);padding:10px 22px;border-radius:50px;font-size:.82rem;opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;z-index:500;white-space:nowrap}
     .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
@@ -320,6 +369,31 @@
 
 <!-- SCROLL TO TOP -->
 <button class="scroll-top-btn" id="scrollTopBtn" aria-label="Volver arriba">↑</button>
+
+<!-- CHAT WIDGET -->
+<button class="chat-fab" id="chatFab" aria-label="Abrir asistente de fragancias">
+  <span class="chat-fab-dot"></span>
+  <span class="chat-fab-icon">✨</span>
+  <span class="chat-fab-text">Asistente<span class="chat-fab-sub">¿Qué buscas hoy?</span></span>
+</button>
+
+<div class="chat-panel" id="chatPanel" role="dialog" aria-label="Asistente Parfum">
+  <div class="chat-panel-header">
+    <div class="chat-panel-avatar">✨</div>
+    <div class="chat-panel-info">
+      <div class="chat-panel-name">Parfum – Asesor de fragancias</div>
+      <div class="chat-panel-status">En línea</div>
+    </div>
+    <button class="chat-close-btn" id="chatClose">✕</button>
+  </div>
+  <div class="chat-messages" id="chatMessages"></div>
+  <div class="chat-input-area">
+    <textarea class="chat-input" id="chatInput" placeholder="¿Para qué ocasión buscas una fragancia?" rows="1"></textarea>
+    <button class="chat-send-btn" id="chatSend" aria-label="Enviar">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+    </button>
+  </div>
+</div>
 
 <!-- PRODUCT MODAL -->
 <div class="modal-overlay" id="modalOverlay">
@@ -1156,6 +1230,173 @@
   $('heroCountText').textContent = `Más de ${Math.floor(products.length / 10) * 10} fragancias`;
   renderProducts();
   updateCartUI();
+
+  // ── CHAT ASISTENTE IA ──
+  // 🔑 Obtén tu API key gratuita en: https://aistudio.google.com/app/apikey
+  const GEMINI_API_KEY = 'TU_API_KEY_AQUI';
+  const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`;
+
+  const chatHistory = []; // { role: 'user'|'model', parts: [{text}] }
+  let chatOpen = false;
+  let chatTyping = false;
+
+  // Catálogo compacto para el sistema prompt
+  const catalogCtx = products.map(p =>
+    `[${p.sku}] ${p.name} | ${({mujer:'Mujer',hombre:'Hombre',unisex:'Unisex',arabes:'Árabe',originales:'Original',relojes:'Reloj',combos:'Combo'})[p.gender]||p.gender} | $${fmt(p.price)}`
+  ).join('\n');
+
+  const SYSTEM_PROMPT = `Eres "Parfum", el asesor experto de Trivino Parfums, tienda colombiana de fragancias premium importadas. Tu misión es ayudar a los clientes a encontrar el perfume ideal según su gusto, personalidad, ocasión o presupuesto.
+
+REGLAS ESTRICTAS:
+- Solo responde preguntas relacionadas con perfumes y fragancias. Si te preguntan otra cosa, declina amablemente.
+- Cuando recomiendes un producto, SIEMPRE incluye su código SKU entre corchetes al final así: [SKU:xxxxxx]
+- Máximo 3 recomendaciones por respuesta.
+- Sé cálido, experto y apasionado. Responde en español.
+- Los perfumes son versiones 1.1 (premium, muy similares al original). Los marcados como "Original" sí son originales.
+- Si el usuario pregunta por precio, oriéntalo pero invítalo a ver el producto para confirmar.
+- Precios en pesos colombianos COP.
+
+CATÁLOGO COMPLETO (${products.length} fragancias):
+${catalogCtx}`;
+
+  function addChatMessage(role, html, chips = []) {
+    const msgs = $('chatMessages');
+    const wrap = document.createElement('div');
+    wrap.className = `chat-msg ${role}`;
+    const bubble = document.createElement('div');
+    bubble.className = 'chat-bubble';
+    bubble.innerHTML = html;
+    wrap.appendChild(bubble);
+    chips.forEach(p => {
+      const img = p.images[0] || '';
+      const chip = document.createElement('button');
+      chip.className = 'chat-product-chip';
+      chip.innerHTML = `<img src="${img}" alt="${p.name}" loading="lazy" onerror="this.style.display='none'"/><div class="chat-product-info"><span class="chat-product-name">${p.name}</span><span class="chat-product-price">$${fmt(p.price)}</span></div><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>`;
+      chip.addEventListener('click', () => { closeChatPanel(); openModal(p.id); });
+      wrap.appendChild(chip);
+    });
+    msgs.appendChild(wrap);
+    msgs.scrollTop = msgs.scrollHeight;
+    return wrap;
+  }
+
+  function showTyping() {
+    const msgs = $('chatMessages');
+    const wrap = document.createElement('div');
+    wrap.className = 'chat-msg bot';
+    wrap.id = 'chatTypingIndicator';
+    wrap.innerHTML = '<div class="chat-bubble chat-typing"><span></span><span></span><span></span></div>';
+    msgs.appendChild(wrap);
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+  function hideTyping() {
+    const el = document.getElementById('chatTypingIndicator');
+    if (el) el.remove();
+  }
+
+  function parseAIResponse(text) {
+    // Extraer SKUs referenciados y los productos correspondientes
+    const skuRefs = [...new Set([...text.matchAll(/\[SKU:([a-z0-9]{4,8})\]/gi)].map(m => m[1].toLowerCase()))];
+    const chips = skuRefs.map(sku => products.find(p => p.sku === sku)).filter(Boolean);
+    // Formatear texto: quitar SKU tags, negritas en *texto*
+    let html = text
+      .replace(/\[SKU:[a-z0-9]+\]/gi, '')
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*(.*?)\*/g, '<em>$1</em>')
+      .replace(/\n{2,}/g, '<br><br>')
+      .replace(/\n/g, '<br>')
+      .trim();
+    return { html, chips };
+  }
+
+  async function sendChat(userText) {
+    if (chatTyping || !userText.trim()) return;
+    if (GEMINI_API_KEY === 'TU_API_KEY_AQUI') {
+      addChatMessage('bot', '⚠️ El asistente no está configurado aún. <br><small>El administrador debe agregar la API key de Gemini.</small>');
+      return;
+    }
+    chatTyping = true;
+    $('chatSend').disabled = true;
+
+    addChatMessage('user', userText.replace(/</g,'&lt;'));
+    chatHistory.push({ role: 'user', parts: [{ text: userText }] });
+
+    showTyping();
+
+    try {
+      const body = {
+        system_instruction: { parts: [{ text: SYSTEM_PROMPT }] },
+        contents: chatHistory,
+        generationConfig: { maxOutputTokens: 512, temperature: 0.7 },
+        safetySettings: [
+          { category: 'HARM_CATEGORY_HARASSMENT', threshold: 'BLOCK_MEDIUM_AND_ABOVE' },
+          { category: 'HARM_CATEGORY_HATE_SPEECH', threshold: 'BLOCK_MEDIUM_AND_ABOVE' },
+        ]
+      };
+      const resp = await fetch(GEMINI_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      });
+      if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+      const data = await resp.json();
+      const aiText = data?.candidates?.[0]?.content?.parts?.[0]?.text || 'Lo siento, no pude generar una respuesta.';
+      chatHistory.push({ role: 'model', parts: [{ text: aiText }] });
+      hideTyping();
+      const { html, chips } = parseAIResponse(aiText);
+      addChatMessage('bot', html, chips);
+    } catch (e) {
+      hideTyping();
+      addChatMessage('bot', '⚠️ Ocurrió un error al contactar al asistente. Intenta de nuevo.');
+      console.error('[Chat]', e);
+    } finally {
+      chatTyping = false;
+      $('chatSend').disabled = false;
+    }
+  }
+
+  function openChatPanel() {
+    chatOpen = true;
+    $('chatPanel').classList.add('open');
+    $('chatFab').style.display = 'none';
+    if (chatHistory.length === 0) {
+      addChatMessage('bot', '¡Hola! Soy <strong>Parfum</strong>, tu asesor de fragancias 🌹<br><br>Cuéntame: ¿para qué ocasión buscas un perfume? ¿Tienes alguna fragancia favorita o una marca que te guste?');
+    }
+    setTimeout(() => $('chatInput').focus(), 350);
+  }
+  function closeChatPanel() {
+    chatOpen = false;
+    $('chatPanel').classList.remove('open');
+    $('chatFab').style.display = '';
+  }
+
+  $('chatFab').addEventListener('click', openChatPanel);
+  $('chatClose').addEventListener('click', closeChatPanel);
+
+  $('chatSend').addEventListener('click', () => {
+    const val = $('chatInput').value.trim();
+    if (!val) return;
+    $('chatInput').value = '';
+    $('chatInput').style.height = 'auto';
+    sendChat(val);
+  });
+
+  $('chatInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      const val = $('chatInput').value.trim();
+      if (!val) return;
+      $('chatInput').value = '';
+      $('chatInput').style.height = 'auto';
+      sendChat(val);
+    }
+  });
+
+  // Auto-resize textarea
+  $('chatInput').addEventListener('input', function() {
+    this.style.height = 'auto';
+    this.style.height = Math.min(this.scrollHeight, 100) + 'px';
+  });
 </script>
 </body>
 </html>
