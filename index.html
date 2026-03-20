@@ -276,7 +276,12 @@
   <div class="modal" id="productModal" role="dialog" aria-modal="true">
     <div class="modal-header">
       <span class="modal-header-brand" id="modalBrand"></span>
-      <button class="modal-close" id="modalClose" aria-label="Cerrar">✕</button>
+      <div style="display:flex;gap:8px;align-items:center">
+        <button class="modal-close" id="modalShare" aria-label="Compartir" title="Copiar link del producto">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        </button>
+        <button class="modal-close" id="modalClose" aria-label="Cerrar">✕</button>
+      </div>
     </div>
     <div class="modal-body">
       <!-- Gallery / Carousel -->
@@ -864,6 +869,7 @@
 
     $('modalOverlay').classList.add('open');
     document.body.style.overflow = 'hidden';
+    history.replaceState(null, '', '?p=' + id);
   }
 
   // ── CAROUSEL (scroll-snap nativo, sin JS de transform) ──
@@ -952,10 +958,20 @@
     $('modalOverlay').classList.remove('open');
     document.body.style.overflow = '';
     modalProduct = null;
+    history.replaceState(null, '', location.pathname);
   }
   $('modalOverlay').addEventListener('click', e => { if (e.target === $('modalOverlay')) closeModal(); });
   $('modalClose').addEventListener('click', closeModal);
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  // ── COMPARTIR PRODUCTO ──
+  $('modalShare').addEventListener('click', () => {
+    navigator.clipboard.writeText(location.href).then(() => showToast('🔗 Link copiado'));
+  });
+
+  // ── DEEP LINK: abrir producto si viene ?p=ID en la URL ──
+  const urlId = +new URLSearchParams(location.search).get('p');
+  if (urlId) openModal(urlId);
 
   // ── CART ──
   function addToCart(id, qty = 1) {
