@@ -1028,9 +1028,10 @@
     const thumbsEl = $('galleryThumbs');
     const dotsEl = $('carouselDots');
 
-    // Slides
+    // Slides — width fijo en px para que el translate sea exacto
+    const slideW = document.getElementById('carouselWrap')?.offsetWidth || 0;
     track.innerHTML = imgs.map((src, i) =>
-      `<div class="carousel-slide"><img src="${src}" alt="${modalProduct.name} ${i+1}" loading="${i===0?'eager':'lazy'}" onerror="this.style.display='none'"/></div>`
+      `<div class="carousel-slide" style="min-width:${slideW}px"><img src="${src}" alt="${modalProduct.name} ${i+1}" loading="${i===0?'eager':'lazy'}" onerror="this.style.display='none'"/></div>`
     ).join('');
     setCarouselPos(0, false);
 
@@ -1078,12 +1079,15 @@
   function setCarouselPos(idx, animate) {
     const track = document.getElementById('carouselTrack');
     if (!track) return;
+    const wrap = document.getElementById('carouselWrap');
+    const slideW = wrap ? wrap.offsetWidth : 0;
+    const x = -(idx * slideW);
     if (animate === false) {
       track.style.transition = 'none';
-      track.style.transform = `translateX(-${idx * 100}%)`;
+      track.style.transform = `translateX(${x}px)`;
       requestAnimationFrame(() => requestAnimationFrame(() => { track.style.transition = ''; }));
     } else {
-      track.style.transform = `translateX(-${idx * 100}%)`;
+      track.style.transform = `translateX(${x}px)`;
     }
   }
 
