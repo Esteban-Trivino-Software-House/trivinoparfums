@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trivino Parfums – Fragancias Premium</title>
+  <meta name="description" content="Trivino Parfums – Catálogo de fragancias Premium 1.1 importadas con duración de 8-12 horas." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #c9a84c;
+      --gold-light: #e8cc80;
+      --dark: #0d0d0d;
+      --dark2: #1a1a1a;
+      --dark3: #242424;
+      --text: #f0ece4;
+      --text-muted: #9e9e9e;
+      --border: #2e2e2e;
+      --card-bg: #161616;
+      --wa-green: #25d366;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--dark);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(13,13,13,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: var(--gold);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo span { color: var(--text); font-weight: 400; font-style: italic; font-size: 0.9rem; }
+
+    .cart-btn {
+      position: relative;
+      background: var(--dark3);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 10px 20px;
+      border-radius: 50px;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .cart-btn:hover { border-color: var(--gold); background: var(--dark2); }
+    .cart-count {
+      background: var(--gold);
+      color: var(--dark);
+      border-radius: 50%;
+      width: 20px; height: 20px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      margin-top: 70px;
+      padding: 80px 24px 60px;
+      text-align: center;
+      background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(201,168,76,0.15) 0%, transparent 70%);
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+    .hero h1 em { color: var(--gold); font-style: italic; }
+    .hero p {
+      color: var(--text-muted);
+      font-size: 1rem;
+      max-width: 500px;
+      margin: 0 auto 32px;
+      line-height: 1.6;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      padding: 8px 18px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+    .hero-badge::before {
+      content: '';
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--gold);
+    }
+
+    /* ── FILTERS ── */
+    .filters {
+      display: flex;
+      gap: 10px;
+      padding: 24px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .filter-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 8px 20px;
+      border-radius: 50px;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+      transition: all 0.2s;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: rgba(201,168,76,0.08);
+    }
+
+    /* ── PRODUCTS GRID ── */
+    .products-section { padding: 0 24px 100px; }
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .product-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: transform 0.3s ease, border-color 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+    }
+    .product-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(201,168,76,0.4);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(201,168,76,0.1);
+    }
+
+    .product-img-wrap {
+      position: relative;
+      aspect-ratio: 1;
+      background: #111;
+      overflow: hidden;
+    }
+    .product-img-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .product-card:hover .product-img-wrap img { transform: scale(1.05); }
+
+    .product-gender-badge {
+      position: absolute;
+      top: 12px; left: 12px;
+      background: rgba(13,13,13,0.85);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 50px;
+      backdrop-filter: blur(8px);
+    }
+
+    .product-info { padding: 18px; }
+    .product-brand {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+    .product-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      line-height: 1.3;
+      margin-bottom: 14px;
+      color: var(--text);
+    }
+    .product-price-row {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .product-price {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .product-volume {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .add-to-cart-btn {
+      width: 100%;
+      background: var(--gold);
+      color: var(--dark);
+      border: none;
+      padding: 12px;
+      border-radius: 10px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      letter-spacing: 0.02em;
+    }
+    .add-to-cart-btn:hover { background: var(--gold-light); }
+    .add-to-cart-btn:active { transform: scale(0.98); }
+
+    /* ── CART DRAWER ── */
+    .cart-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      z-index: 200;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+    .cart-overlay.open { opacity: 1; pointer-events: all; }
+
+    .cart-drawer {
+      position: fixed;
+      top: 0; right: 0;
+      width: min(420px, 100vw);
+      height: 100vh;
+      background: var(--dark2);
+      border-left: 1px solid var(--border);
+      z-index: 201;
+      display: flex;
+      flex-direction: column;
+      transform: translateX(100%);
+      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .cart-drawer.open { transform: translateX(0); }
+
+    .cart-header {
+      padding: 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .cart-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+    .close-btn {
+      background: var(--dark3);
+      border: 1px solid var(--border);
+      color: var(--text);
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.2s;
+    }
+    .close-btn:hover { border-color: var(--gold); }
+
+    .cart-items {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px;
+    }
+    .cart-items::-webkit-scrollbar { width: 4px; }
+    .cart-items::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+    .cart-empty {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-muted);
+    }
+    .cart-empty svg { margin-bottom: 16px; opacity: 0.3; }
+    .cart-empty p { font-family: 'Playfair Display', serif; font-size: 1.1rem; margin-bottom: 8px; }
+    .cart-empty span { font-size: 0.85rem; }
+
+    .cart-item {
+      display: grid;
+      grid-template-columns: 70px 1fr auto;
+      gap: 14px;
+      align-items: start;
+      padding: 14px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      margin-bottom: 10px;
+      background: var(--dark3);
+    }
+    .cart-item img {
+      width: 70px; height: 70px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+    .cart-item-info { min-width: 0; }
+    .cart-item-name {
+      font-size: 0.82rem;
+      font-weight: 500;
+      line-height: 1.3;
+      margin-bottom: 6px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .cart-item-price { font-size: 0.85rem; color: var(--gold); font-weight: 600; margin-bottom: 8px; }
+    .qty-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .qty-btn {
+      background: var(--dark2);
+      border: 1px solid var(--border);
+      color: var(--text);
+      width: 26px; height: 26px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.2s;
+    }
+    .qty-btn:hover { border-color: var(--gold); color: var(--gold); }
+    .qty-value { font-size: 0.875rem; min-width: 20px; text-align: center; }
+    .remove-item-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 1rem;
+      padding: 4px;
+      transition: color 0.2s;
+      line-height: 1;
+      margin-top: 2px;
+    }
+    .remove-item-btn:hover { color: #e74c3c; }
+
+    .cart-footer {
+      padding: 20px 24px;
+      border-top: 1px solid var(--border);
+      background: var(--dark2);
+    }
+    .cart-total-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    .cart-total-label { font-size: 0.9rem; color: var(--text-muted); }
+    .cart-total-amount {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    .whatsapp-btn {
+      width: 100%;
+      background: var(--wa-green);
+      color: #fff;
+      border: none;
+      padding: 15px;
+      border-radius: 12px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: background 0.2s, transform 0.1s;
+      letter-spacing: 0.02em;
+    }
+    .whatsapp-btn:hover { background: #20b858; }
+    .whatsapp-btn:active { transform: scale(0.98); }
+    .whatsapp-btn svg { flex-shrink: 0; }
+    .whatsapp-btn:disabled {
+      background: var(--border);
+      color: var(--text-muted);
+      cursor: not-allowed;
+    }
+
+    /* ── TOAST ── */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--dark3);
+      border: 1px solid var(--gold);
+      color: var(--text);
+      padding: 12px 24px;
+      border-radius: 50px;
+      font-size: 0.875rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s, transform 0.3s;
+      z-index: 300;
+      white-space: nowrap;
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 24px;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+    }
+    footer .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .hero { padding: 60px 20px 40px; }
+      .products-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+      .products-section { padding: 0 14px 100px; }
+      .filters { padding: 16px 14px; gap: 8px; }
+    }
+    @media (max-width: 380px) {
+      .products-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a class="logo" href="#">
+    Trivino Parfums
+    <span>Collection</span>
+  </a>
+  <button class="cart-btn" id="openCartBtn" aria-label="Abrir carrito">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+      <line x1="3" y1="6" x2="21" y2="6"/>
+      <path d="M16 10a4 4 0 0 1-8 0"/>
+    </svg>
+    Carrito
+    <span class="cart-count" id="cartCount">0</span>
+  </button>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-label">Fragancias Premium 1.1</p>
+  <h1>El arte de oler <em>increíble</em></h1>
+  <p>Fragancias importadas de alta duración — entre 8 y 12 horas de proyección. Calidad premium al mejor precio.</p>
+  <div class="hero-badge">Envíos a todo Colombia · Garantía total</div>
+</section>
+
+<!-- FILTERS -->
+<div class="filters">
+  <button class="filter-btn active" data-filter="all">Todos</button>
+  <button class="filter-btn" data-filter="mujer">Para Mujer</button>
+  <button class="filter-btn" data-filter="hombre">Para Hombre</button>
+  <button class="filter-btn" data-filter="unisex">Unisex</button>
+</div>
+
+<!-- PRODUCTS -->
+<section class="products-section">
+  <div class="products-grid" id="productsGrid"></div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Trivino Parfums</div>
+  <p>Fragancias Premium · Colombia</p>
+</footer>
+
+<!-- CART OVERLAY & DRAWER -->
+<div class="cart-overlay" id="cartOverlay"></div>
+<aside class="cart-drawer" id="cartDrawer" aria-label="Carrito de compras">
+  <div class="cart-header">
+    <h2>Tu carrito</h2>
+    <button class="close-btn" id="closeCartBtn" aria-label="Cerrar carrito">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-footer">
+    <div class="cart-total-row">
+      <span class="cart-total-label">Total</span>
+      <span class="cart-total-amount" id="cartTotal">COP $0</span>
+    </div>
+    <button class="whatsapp-btn" id="whatsappBtn" disabled>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
+      </svg>
+      Pedir por WhatsApp
+    </button>
+  </div>
+</aside>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+  // ── CATALOG DATA ──
+  const products = [
+    {
+      id: 1,
+      name: "Dylan Blue Versace",
+      fullName: "Dylan Blue Versace 100 ml",
+      brand: "Versace",
+      volume: "100 ml",
+      gender: "mujer",
+      price: 116000,
+      image: "https://d1b50uin55dq3m.cloudfront.net/fit-in/800x800/7a629dd4-9181-405e-b794-fd3338583216.webp"
+    },
+    {
+      id: 2,
+      name: "Dylan Pour Femme Purple Versace",
+      fullName: "Dylan Pour Femme Purple Versace 100 ml",
+      brand: "Versace",
+      volume: "100 ml",
+      gender: "mujer",
+      price: 130000,
+      image: "https://d1b50uin55dq3m.cloudfront.net/fit-in/800x800/932301c1-3b41-4df8-99f9-60210df08dd4.webp"
+    },
+    {
+      id: 3,
+      name: "Dylan Turquoise Versace",
+      fullName: "Dylan Turquoise Versace 100 ml",
+      brand: "Versace",
+      volume: "100 ml",
+      gender: "mujer",
+      price: 126000,
+      image: "https://d1b50uin55dq3m.cloudfront.net/fit-in/800x800/f3151a06-5cf8-45a5-81df-c57ad4b5afa0.webp"
+    },
+    {
+      id: 4,
+      name: "La Belle Paradise Garden",
+      fullName: "La Belle Paradise Garden 100 ml EDP",
+      brand: "Jean Paul Gaultier",
+      volume: "100 ml",
+      gender: "mujer",
+      price: 150000,
+      image: "https://d1b50uin55dq3m.cloudfront.net/fit-in/800x800/e1cc9bfa-32f9-4ebe-a51e-ecee339b5317.jpeg"
+    },
+    {
+      id: 5,
+      name: "Fresh Couture Moschino",
+      fullName: "Moschino Fresh Couture 100 ml",
+      brand: "Moschino",
+      volume: "100 ml",
+      gender: "mujer",
+      price: 136000,
+      image: "https://d1b50uin55dq3m.cloudfront.net/fit-in/800x800/3a1c450b-8b6e-4e7c-846a-b8a6715dc7df.webp"
+    },
+    {
+      id: 6,
+      name: "Fresh Pink Moschino",
+      fullName: "Moschino Fresh Pink 100 ml",
+      brand: "Moschino",
+      volume: "100 ml",
+      gender: "mujer",
+      price: 130000,
+      image: "https://d1b50uin55dq3m.cloudfront.net/fit-in/800x800/6e4edb7b-3dfc-4d98-bd60-b4fbe98facec.webp"
+    },
+    {
+      id: 7,
+      name: "Purr Katy Perry",
+      fullName: "Purr Katy Perry 100 ml",
+      brand: "Katy Perry",
+      volume: "100 ml",
+      gender: "mujer",
+      price: 112000,
+      image: "https://d1b50uin55dq3m.cloudfront.net/fit-in/800x800/aa70677d-6433-4ca6-ab6e-c63c8db95752.webp"
+    },
+    {
+      id: 8,
+      name: "Rosé Rush Paris Hilton",
+      fullName: "Rosé Rush Paris Hilton 100 ml",
+      brand: "Paris Hilton",
+      volume: "100 ml",
+      gender: "mujer",
+      price: 112000,
+      image: "https://d1b50uin55dq3m.cloudfront.net/fit-in/800x800/04e036c7-4d86-4fc8-92bc-ac017e59a098.webp"
+    },
+    {
+      id: 9,
+      name: "Bharara Niche Femme",
+      fullName: "Bharara Niche Femme (estuche)",
+      brand: "Bharara",
+      volume: "Estuche",
+      gender: "mujer",
+      price: 214000,
+      image: "https://d1b50uin55dq3m.cloudfront.net/fit-in/800x800/c26a5a3a-19d0-4157-81f3-40242f8c606c.jpeg"
+    },
+    {
+      id: 10,
+      name: "Bombshell Seduction Victoria's Secret",
+      fullName: "Bombshell Seduction Victoria's Secret 100 ml",
+      brand: "Victoria's Secret",
+      volume: "100 ml",
+      gender: "mujer",
+      price: 110000,
+      image: "https://d1b50uin55dq3m.cloudfront.net/fit-in/800x800/16867b30-d7de-49e8-b7d1-92f7bbb52017.webp"
+    },
+    {
+      id: 11,
+      name: "Bombshell Victoria's Secret",
+      fullName: "Bombshell Victoria's Secret 100 ml",
+      brand: "Victoria's Secret",
+      volume: "100 ml",
+      gender: "mujer",
+      price: 104000,
+      image: "https://d1b50uin55dq3m.cloudfront.net/fit-in/800x800/768e1885-cdae-410d-8c78-1d8cc69e6bb6.webp"
+    },
+    {
+      id: 12,
+      name: "Euphoria Calvin Klein Women",
+      fullName: "Euphoria Calvin Klein Women 100 ml",
+      brand: "Calvin Klein",
+      volume: "100 ml",
+      gender: "mujer",
+      price: 104000,
+      image: "https://d1b50uin55dq3m.cloudfront.net/fit-in/800x800/1052d6be-4161-4312-babc-cb187bc9d4f7.webp"
+    }
+  ];
+
+  // ── STATE ──
+  let cart = [];
+  let activeFilter = 'all';
+
+  // ── HELPERS ──
+  const fmt = (n) => 'COP $' + n.toLocaleString('es-CO');
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2500);
+  }
+
+  // ── RENDER PRODUCTS ──
+  function renderProducts() {
+    const grid = document.getElementById('productsGrid');
+    const filtered = activeFilter === 'all'
+      ? products
+      : products.filter(p => p.gender === activeFilter);
+
+    grid.innerHTML = filtered.map(p => `
+      <article class="product-card" data-gender="${p.gender}">
+        <div class="product-img-wrap">
+          <img src="${p.image}" alt="${p.fullName}" loading="lazy" />
+          <span class="product-gender-badge">${p.gender === 'mujer' ? '♀ Mujer' : p.gender === 'hombre' ? '♂ Hombre' : '⚥ Unisex'}</span>
+        </div>
+        <div class="product-info">
+          <div class="product-brand">${p.brand}</div>
+          <div class="product-name">${p.name}</div>
+          <div class="product-price-row">
+            <span class="product-price">${fmt(p.price)}</span>
+            <span class="product-volume">${p.volume}</span>
+          </div>
+          <button class="add-to-cart-btn" onclick="addToCart(${p.id})">
+            Agregar al carrito
+          </button>
+        </div>
+      </article>
+    `).join('');
+  }
+
+  // ── CART LOGIC ──
+  function addToCart(productId) {
+    const product = products.find(p => p.id === productId);
+    const existing = cart.find(i => i.id === productId);
+    if (existing) {
+      existing.qty++;
+    } else {
+      cart.push({ ...product, qty: 1 });
+    }
+    updateCartUI();
+    showToast(`✓ ${product.name} agregado al carrito`);
+  }
+
+  function removeFromCart(productId) {
+    cart = cart.filter(i => i.id !== productId);
+    updateCartUI();
+  }
+
+  function changeQty(productId, delta) {
+    const item = cart.find(i => i.id === productId);
+    if (!item) return;
+    item.qty += delta;
+    if (item.qty <= 0) removeFromCart(productId);
+    else updateCartUI();
+  }
+
+  function updateCartUI() {
+    const totalItems = cart.reduce((s, i) => s + i.qty, 0);
+    const totalPrice = cart.reduce((s, i) => s + i.price * i.qty, 0);
+
+    document.getElementById('cartCount').textContent = totalItems;
+    document.getElementById('cartTotal').textContent = fmt(totalPrice);
+
+    const btn = document.getElementById('whatsappBtn');
+    btn.disabled = cart.length === 0;
+
+    const itemsEl = document.getElementById('cartItems');
+    if (cart.length === 0) {
+      itemsEl.innerHTML = `
+        <div class="cart-empty">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <path d="M16 10a4 4 0 0 1-8 0"/>
+          </svg>
+          <p>Tu carrito está vacío</p>
+          <span>Agrega fragancias para comenzar tu pedido</span>
+        </div>`;
+      return;
+    }
+
+    itemsEl.innerHTML = cart.map(item => `
+      <div class="cart-item">
+        <img src="${item.image}" alt="${item.name}" />
+        <div class="cart-item-info">
+          <div class="cart-item-name">${item.fullName}</div>
+          <div class="cart-item-price">${fmt(item.price)}</div>
+          <div class="qty-controls">
+            <button class="qty-btn" onclick="changeQty(${item.id}, -1)">−</button>
+            <span class="qty-value">${item.qty}</span>
+            <button class="qty-btn" onclick="changeQty(${item.id}, +1)">+</button>
+          </div>
+        </div>
+        <button class="remove-item-btn" onclick="removeFromCart(${item.id})" aria-label="Eliminar">✕</button>
+      </div>
+    `).join('');
+  }
+
+  // ── CART DRAWER ──
+  function openCart() {
+    document.getElementById('cartDrawer').classList.add('open');
+    document.getElementById('cartOverlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeCart() {
+    document.getElementById('cartDrawer').classList.remove('open');
+    document.getElementById('cartOverlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('openCartBtn').addEventListener('click', openCart);
+  document.getElementById('closeCartBtn').addEventListener('click', closeCart);
+  document.getElementById('cartOverlay').addEventListener('click', closeCart);
+
+  // ── WHATSAPP ORDER ──
+  document.getElementById('whatsappBtn').addEventListener('click', () => {
+    if (cart.length === 0) return;
+
+    const totalPrice = cart.reduce((s, i) => s + i.price * i.qty, 0);
+    const itemLines = cart.map(i =>
+      `  • ${i.fullName} x${i.qty} — ${fmt(i.price * i.qty)}`
+    ).join('\n');
+
+    const msg =
+      `🌸 *Pedido en Trivino Parfums*\n` +
+      `━━━━━━━━━━━━━━━━━━━━━\n\n` +
+      `*Productos:*\n${itemLines}\n\n` +
+      `━━━━━━━━━━━━━━━━━━━━━\n` +
+      `💰 *Total: ${fmt(totalPrice)}*\n\n` +
+      `_Por favor confirma disponibilidad y método de pago. ¡Gracias!_ 🙏`;
+
+    const phone = '573015142547';
+    const url = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
+    window.open(url, '_blank');
+  });
+
+  // ── FILTERS ──
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeFilter = btn.dataset.filter;
+      renderProducts();
+    });
+  });
+
+  // ── INIT ──
+  renderProducts();
+  updateCartUI();
+</script>
+</body>
+</html>
