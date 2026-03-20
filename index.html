@@ -1053,7 +1053,7 @@
   scrollTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
   // ── INIT ──
-  $('heroCount').textContent = products.length;
+  $('heroCount').textContent = Math.floor(products.length / 10) * 10;
   renderProducts();
   updateCartUI();
 </script>
