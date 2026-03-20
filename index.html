@@ -20,14 +20,14 @@
     body{font-family:'Inter',sans-serif;background:var(--dark);color:var(--text);min-height:100vh;overflow-x:hidden}
 
     /* ── HEADER ── */
-    header{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(13,13,13,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 20px;height:65px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+    header{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(13,13,13,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 16px;height:65px;display:flex;align-items:center;justify-content:space-between;gap:10px}
     .logo{font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:700;letter-spacing:.05em;color:var(--gold);text-decoration:none;white-space:nowrap}
     .logo span{color:var(--text);font-weight:400;font-style:italic;font-size:.78rem;margin-left:4px}
     .header-right{display:flex;align-items:center;gap:10px}
     .search-wrap{position:relative}
-    .search-input{background:var(--dark3);border:1px solid var(--border);color:var(--text);padding:8px 14px 8px 36px;border-radius:50px;font-family:'Inter',sans-serif;font-size:.82rem;width:200px;transition:border-color .2s,width .3s;outline:none}
+    .search-input{background:var(--dark3);border:1px solid var(--border);color:var(--text);padding:8px 14px 8px 36px;border-radius:50px;font-family:'Inter',sans-serif;font-size:.82rem;width:180px;transition:border-color .2s,width .3s;outline:none}
     .search-input::placeholder{color:var(--text-muted)}
-    .search-input:focus{border-color:var(--gold);width:260px}
+    .search-input:focus{border-color:var(--gold);width:220px}
     .search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--text-muted);pointer-events:none}
     .cart-btn{background:var(--dark3);border:1px solid var(--border);color:var(--text);padding:9px 16px;border-radius:50px;cursor:pointer;font-family:'Inter',sans-serif;font-size:.82rem;display:flex;align-items:center;gap:7px;transition:border-color .2s;white-space:nowrap}
     .cart-btn:hover{border-color:var(--gold)}
@@ -94,7 +94,7 @@
     .carousel-track-wrap{position:relative;aspect-ratio:1;overflow:hidden;flex-shrink:0;touch-action:pan-y}
     .carousel-track{display:flex;height:100%;transition:transform .35s cubic-bezier(.4,0,.2,1);will-change:transform}
     .carousel-slide{min-width:100%;height:100%;position:relative;flex-shrink:0}
-    .carousel-slide img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
+    .carousel-slide img{width:100%;height:100%;object-fit:contain;display:block;pointer-events:none;background:#0a0a0a}
 
     /* Arrows */
     .gallery-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(13,13,13,.75);border:1px solid rgba(255,255,255,.15);color:#fff;width:36px;height:36px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.1rem;transition:background .2s,border-color .2s;z-index:5;line-height:1}
@@ -195,17 +195,23 @@
       .modal{max-height:95vh;border-radius:20px 20px 0 0;margin-top:auto;align-self:flex-end}
       .modal-overlay{align-items:flex-end;padding:0}
       .modal-gallery{max-height:none}
-      .carousel-track-wrap{aspect-ratio:auto;height:240px}
+      .carousel-track-wrap{aspect-ratio:auto;height:260px}
       .modal-details{padding:18px}
       .modal-name{font-size:1.1rem}
       .modal-price{font-size:1.35rem}
-      .search-input{width:130px}.search-input:focus{width:160px}
+      /* Header: 2 filas en móvil */
+      header{height:auto;flex-wrap:wrap;padding:10px 16px;gap:8px}
+      .header-right{order:1;margin-left:auto;flex-shrink:0}
+      .search-wrap{order:2;width:100%;flex-basis:100%}
+      .search-input{width:100%;box-sizing:border-box}
+      .search-input:focus{width:100%}
+      /* Ajustar padding del contenido para el header más alto */
+      .hero{margin-top:105px}
+      .products-section{padding:16px 12px 120px}
       .products-grid{grid-template-columns:repeat(2,1fr);gap:12px}
-      .products-section{padding:14px 14px 120px}
     }
     @media(max-width:360px){
       .products-grid{grid-template-columns:1fr}
-      .search-wrap{display:none}
     }
   </style>
 </head>
