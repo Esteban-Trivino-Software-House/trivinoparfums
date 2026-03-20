@@ -869,7 +869,7 @@
 
     $('modalOverlay').classList.add('open');
     document.body.style.overflow = 'hidden';
-    history.replaceState(null, '', '?p=' + id);
+    history.replaceState(null, '', '?p=' + modalProduct.sku);
   }
 
   // ── CAROUSEL (scroll-snap nativo, sin JS de transform) ──
@@ -969,9 +969,12 @@
     navigator.clipboard.writeText(location.href).then(() => showToast('🔗 Link copiado'));
   });
 
-  // ── DEEP LINK: abrir producto si viene ?p=ID en la URL ──
-  const urlId = +new URLSearchParams(location.search).get('p');
-  if (urlId) openModal(urlId);
+  // ── DEEP LINK: abrir producto si viene ?p=SKU en la URL ──
+  const urlSku = new URLSearchParams(location.search).get('p');
+  if (urlSku) {
+    const linked = products.find(p => p.sku === urlSku);
+    if (linked) openModal(linked.id);
+  }
 
   // ── CART ──
   function addToCart(id, qty = 1) {
