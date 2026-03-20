@@ -1359,9 +1359,14 @@ ${catalogCtx}`;
       const resp = await fetch(GEMINI_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        referrerPolicy: 'unsafe-url',
         body: JSON.stringify(body)
       });
-      if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+      if (!resp.ok) {
+        const errData = await resp.json().catch(() => ({}));
+        const msg = errData?.error?.message || `HTTP ${resp.status}`;
+        throw new Error(msg);
+      }
       const data = await resp.json();
       const aiText = data?.candidates?.[0]?.content?.parts?.[0]?.text || 'Lo siento, no pude generar una respuesta.';
       chatHistory.push({ role: 'model', parts: [{ text: aiText }] });
@@ -1370,8 +1375,11 @@ ${catalogCtx}`;
       addChatMessage('bot', html, chips);
     } catch (e) {
       hideTyping();
-      addChatMessage('bot', '⚠️ Ocurrió un error al contactar al asistente. Intenta de nuevo.');
-      console.error('[Chat]', e);
+      const msg = e.message?.includes('blocked') ? '⚠️ Acceso bloqueado. Contacta al administrador.' 
+                : e.message?.includes('quota') ? '⚠️ Límite diario alcanzado. Intenta mañana 🙏'
+                : '⚠️ Error al contactar el asistente. Intenta de nuevo.';
+      addChatMessage('bot', msg);
+      console.error('[Chat]', e.message);
     } finally {
       chatTyping = false;
       $('chatSend').disabled = false;
