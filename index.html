@@ -1375,10 +1375,11 @@ ${catalogCtx}`;
       addChatMessage('bot', html, chips);
     } catch (e) {
       hideTyping();
-      const msg = e.message?.includes('blocked') ? '⚠️ Acceso bloqueado. Contacta al administrador.' 
-                : e.message?.includes('quota') ? '⚠️ Límite diario alcanzado. Intenta mañana 🙏'
-                : '⚠️ Error al contactar el asistente. Intenta de nuevo.';
-      addChatMessage('bot', msg);
+      const msg = e.message?.includes('blocked') ? '⚠️ Solicitud bloqueada por restricción de dominio.'
+                : e.message?.includes('quota') || e.message?.includes('RESOURCE_EXHAUSTED') ? '⚠️ Límite diario alcanzado. Intenta mañana 🙏'
+                : e.message?.includes('leaked') || e.message?.includes('403') ? '⚠️ API key inválida o revocada.'
+                : `⚠️ ${e.message || 'Error desconocido'}`;
+      addChatMessage('bot', msg + '<br><small style="opacity:.5">Código: ' + (e.message||'?') + '</small>');
       console.error('[Chat]', e.message);
     } finally {
       chatTyping = false;
