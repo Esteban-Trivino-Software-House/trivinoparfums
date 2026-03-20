@@ -522,6 +522,7 @@
   <button class="filter-btn" data-filter="mujer">Para Mujer</button>
   <button class="filter-btn" data-filter="hombre">Para Hombre</button>
   <button class="filter-btn" data-filter="unisex">Unisex</button>
+  <button class="filter-btn" data-filter="relojes">Relojes</button>
 </div>
 
 <!-- PRODUCTS -->
@@ -562,126 +563,223 @@
 
 <script>
   // ── CATALOG DATA ──
+  // Precios = 2x precio mayorista del proveedor TOKE Perfumería
   const products = [
+    // ── DAMA ──
     {
-      id: 1,
-      name: "Dylan Blue Versace",
-      fullName: "Dylan Blue Versace 100 ml",
-      brand: "Versace",
-      volume: "100 ml",
-      gender: "mujer",
-      price: 116000,
+      id: 1, name: "Dylan Blue Versace", fullName: "Dylan Blue Versace 100 ml",
+      brand: "Versace", volume: "100 ml", gender: "mujer", price: 116000,
       image: "https://d1b50uin55dq3m.cloudfront.net/fit-in/800x800/7a629dd4-9181-405e-b794-fd3338583216.webp"
     },
     {
-      id: 2,
-      name: "Dylan Pour Femme Purple Versace",
-      fullName: "Dylan Pour Femme Purple Versace 100 ml",
-      brand: "Versace",
-      volume: "100 ml",
-      gender: "mujer",
-      price: 130000,
+      id: 2, name: "Dylan Pour Femme Purple Versace", fullName: "Dylan Pour Femme Purple Versace 100 ml",
+      brand: "Versace", volume: "100 ml", gender: "mujer", price: 130000,
       image: "https://d1b50uin55dq3m.cloudfront.net/fit-in/800x800/932301c1-3b41-4df8-99f9-60210df08dd4.webp"
     },
     {
-      id: 3,
-      name: "Dylan Turquoise Versace",
-      fullName: "Dylan Turquoise Versace 100 ml",
-      brand: "Versace",
-      volume: "100 ml",
-      gender: "mujer",
-      price: 126000,
+      id: 3, name: "Dylan Turquoise Versace", fullName: "Dylan Turquoise Versace 100 ml",
+      brand: "Versace", volume: "100 ml", gender: "mujer", price: 126000,
       image: "https://d1b50uin55dq3m.cloudfront.net/fit-in/800x800/f3151a06-5cf8-45a5-81df-c57ad4b5afa0.webp"
     },
     {
-      id: 4,
-      name: "La Belle Paradise Garden",
-      fullName: "La Belle Paradise Garden 100 ml EDP",
-      brand: "Jean Paul Gaultier",
-      volume: "100 ml",
-      gender: "mujer",
-      price: 150000,
+      id: 4, name: "La Belle Paradise Garden", fullName: "La Belle Paradise Garden 100 ml EDP",
+      brand: "Jean Paul Gaultier", volume: "100 ml", gender: "mujer", price: 150000,
       image: "https://d1b50uin55dq3m.cloudfront.net/fit-in/800x800/e1cc9bfa-32f9-4ebe-a51e-ecee339b5317.jpeg"
     },
     {
-      id: 5,
-      name: "Fresh Couture Moschino",
-      fullName: "Moschino Fresh Couture 100 ml",
-      brand: "Moschino",
-      volume: "100 ml",
-      gender: "mujer",
-      price: 136000,
+      id: 5, name: "Fresh Couture Moschino", fullName: "Moschino Fresh Couture 100 ml",
+      brand: "Moschino", volume: "100 ml", gender: "mujer", price: 136000,
       image: "https://d1b50uin55dq3m.cloudfront.net/fit-in/800x800/3a1c450b-8b6e-4e7c-846a-b8a6715dc7df.webp"
     },
     {
-      id: 6,
-      name: "Fresh Pink Moschino",
-      fullName: "Moschino Fresh Pink 100 ml",
-      brand: "Moschino",
-      volume: "100 ml",
-      gender: "mujer",
-      price: 130000,
+      id: 6, name: "Fresh Pink Moschino", fullName: "Moschino Fresh Pink 100 ml",
+      brand: "Moschino", volume: "100 ml", gender: "mujer", price: 130000,
       image: "https://d1b50uin55dq3m.cloudfront.net/fit-in/800x800/6e4edb7b-3dfc-4d98-bd60-b4fbe98facec.webp"
     },
     {
-      id: 7,
-      name: "Purr Katy Perry",
-      fullName: "Purr Katy Perry 100 ml",
-      brand: "Katy Perry",
-      volume: "100 ml",
-      gender: "mujer",
-      price: 112000,
+      id: 7, name: "Purr Katy Perry", fullName: "Purr Katy Perry 100 ml",
+      brand: "Katy Perry", volume: "100 ml", gender: "mujer", price: 112000,
       image: "https://d1b50uin55dq3m.cloudfront.net/fit-in/800x800/aa70677d-6433-4ca6-ab6e-c63c8db95752.webp"
     },
     {
-      id: 8,
-      name: "Rosé Rush Paris Hilton",
-      fullName: "Rosé Rush Paris Hilton 100 ml",
-      brand: "Paris Hilton",
-      volume: "100 ml",
-      gender: "mujer",
-      price: 112000,
+      id: 8, name: "Rose Rust Paris Hilton", fullName: "Rose Rust Paris Hilton 100 ml",
+      brand: "Paris Hilton", volume: "100 ml", gender: "mujer", price: 112000,
       image: "https://d1b50uin55dq3m.cloudfront.net/fit-in/800x800/04e036c7-4d86-4fc8-92bc-ac017e59a098.webp"
     },
     {
-      id: 9,
-      name: "Bharara Niche Femme",
-      fullName: "Bharara Niche Femme (estuche)",
-      brand: "Bharara",
-      volume: "Estuche",
-      gender: "mujer",
-      price: 214000,
-      image: "https://d1b50uin55dq3m.cloudfront.net/fit-in/800x800/c26a5a3a-19d0-4157-81f3-40242f8c606c.jpeg"
-    },
-    {
-      id: 10,
-      name: "Bombshell Seduction Victoria's Secret",
-      fullName: "Bombshell Seduction Victoria's Secret 100 ml",
-      brand: "Victoria's Secret",
-      volume: "100 ml",
-      gender: "mujer",
-      price: 110000,
+      id: 9, name: "Bombshell Seduction Victoria's Secret", fullName: "Bombshell Seduction Victoria's Secret 100 ml",
+      brand: "Victoria's Secret", volume: "100 ml", gender: "mujer", price: 110000,
       image: "https://d1b50uin55dq3m.cloudfront.net/fit-in/800x800/16867b30-d7de-49e8-b7d1-92f7bbb52017.webp"
     },
     {
-      id: 11,
-      name: "Bombshell Victoria's Secret",
-      fullName: "Bombshell Victoria's Secret 100 ml",
-      brand: "Victoria's Secret",
-      volume: "100 ml",
-      gender: "mujer",
-      price: 104000,
+      id: 10, name: "Bombshell Victoria's Secret", fullName: "Bombshell Victoria's Secret 100 ml",
+      brand: "Victoria's Secret", volume: "100 ml", gender: "mujer", price: 104000,
       image: "https://d1b50uin55dq3m.cloudfront.net/fit-in/800x800/768e1885-cdae-410d-8c78-1d8cc69e6bb6.webp"
     },
     {
-      id: 12,
-      name: "Euphoria Calvin Klein Women",
-      fullName: "Euphoria Calvin Klein Women 100 ml",
-      brand: "Calvin Klein",
-      volume: "100 ml",
-      gender: "mujer",
-      price: 104000,
+      id: 11, name: "Euphoria Calvin Klein Women", fullName: "Euphoria Calvin Klein Women 100 ml",
+      brand: "Calvin Klein", volume: "100 ml", gender: "mujer", price: 104000,
       image: "https://d1b50uin55dq3m.cloudfront.net/fit-in/800x800/1052d6be-4161-4312-babc-cb187bc9d4f7.webp"
+    },
+    {
+      id: 12, name: "Ilmin Parfums Femme", fullName: "Ilmin Parfums Femme 30 ml (estuche)",
+      brand: "Ilmin", volume: "30 ml", gender: "mujer", price: 190000,
+      image: "https://d1b50uin55dq3m.cloudfront.net/fit-in/800x800/491a9d87-4627-4e0e-8b94-ff495e8902a7.jpeg"
+    },
+    {
+      id: 13, name: "Ilmin Roso", fullName: "Ilmin Roso 30 ml",
+      brand: "Ilmin", volume: "30 ml", gender: "mujer", price: 190000,
+      image: "https://d1b50uin55dq3m.cloudfront.net/fit-in/800x800/69c46793-9dfe-4390-b047-6975f72a34da.jpeg"
+    },
+    {
+      id: 14, name: "Delilah Maison Alhambra", fullName: "Delilah EDP Maison Alhambra 100 ml",
+      brand: "Maison Alhambra", volume: "100 ml", gender: "mujer", price: 130000,
+      image: "https://d1b50uin55dq3m.cloudfront.net/fit-in/800x800/f767d06e-4947-465f-8b14-f531aa8c2ed8.webp"
+    },
+    {
+      id: 15, name: "Diesel Para Dama", fullName: "Diesel Para Dama (original)",
+      brand: "Diesel", volume: "Original", gender: "mujer", price: 110000,
+      image: "https://d1b50uin55dq3m.cloudfront.net/fit-in/800x800/4a6691fd-6a40-4c8d-9ff2-76fa28cd7437.jpg"
+    },
+    {
+      id: 16, name: "La Panthère Cartier", fullName: "La Panthère Cartier (original)",
+      brand: "Cartier", volume: "Original", gender: "mujer", price: 340000,
+      image: "https://d1b50uin55dq3m.cloudfront.net/fit-in/800x800/05177714-e888-4a9e-a60c-fa888aa3745b.jpg"
+    },
+    // ── CABALLERO ──
+    {
+      id: 17, name: "Givenchy Pour Homme Blue Label", fullName: "Givenchy Pour Homme Blue Label 100 ml",
+      brand: "Givenchy", volume: "100 ml", gender: "hombre", price: 110000,
+      image: "https://d1b50uin55dq3m.cloudfront.net/fit-in/800x800/f52b66cd-3d71-4b3e-8382-0e8107013b2d.webp"
+    },
+    {
+      id: 18, name: "Marie Farine Roger & Gallet", fullName: "Marie Farine de Roger & Gallet 100 ml",
+      brand: "Roger & Gallet", volume: "100 ml", gender: "hombre", price: 110000,
+      image: "https://d1b50uin55dq3m.cloudfront.net/fit-in/800x800/92a66e2f-9a9f-49ff-839f-cc2f36c7688d.webp"
+    },
+    {
+      id: 19, name: "Insurrection Reyane Tradition", fullName: "Insurrection by Reyane Tradition para Hombre (original)",
+      brand: "Reyane Tradition", volume: "Original", gender: "hombre", price: 340000,
+      image: "https://d1b50uin55dq3m.cloudfront.net/fit-in/800x800/97e8bbc6-cf9c-46aa-a344-104a93b1aa80.jpg"
+    },
+    // ── UNISEX / ÁRABES ──
+    {
+      id: 20, name: "CK One Calvin Klein", fullName: "CK One Calvin Klein 100 ml",
+      brand: "Calvin Klein", volume: "100 ml", gender: "unisex", price: 110000,
+      image: "https://d1b50uin55dq3m.cloudfront.net/fit-in/800x800/15729ab2-c8dd-4485-b9e2-dc093b46f9ac.webp"
+    },
+    {
+      id: 21, name: "Bharara Niche Femme", fullName: "Bharara Niche Femme (estuche)",
+      brand: "Bharara", volume: "Estuche", gender: "mujer", price: 214000,
+      image: "https://d1b50uin55dq3m.cloudfront.net/fit-in/800x800/c26a5a3a-19d0-4157-81f3-40242f8c606c.jpeg"
+    },
+    {
+      id: 22, name: "Lattafa Oud Sublime", fullName: "Lattafa Oud Sublime 100 ml EDP",
+      brand: "Lattafa", volume: "100 ml", gender: "unisex", price: 136000,
+      image: "https://d1b50uin55dq3m.cloudfront.net/fit-in/800x800/02b9d22a-7ca5-43d6-b517-c8af19b09c04.jpeg"
+    },
+    {
+      id: 23, name: "Orientica Amber Rouge (caja)", fullName: "Orientica Amber Rouge 80 ml – Caja",
+      brand: "Orientica", volume: "80 ml", gender: "unisex", price: 116000,
+      image: "https://d1b50uin55dq3m.cloudfront.net/fit-in/800x800/b9d04f56-51c0-4253-9cfe-f00aed066636.jpeg"
+    },
+    {
+      id: 24, name: "Orientica Amber Rouge (estuche)", fullName: "Orientica Amber Rouge 80 ml – Estuche de lujo",
+      brand: "Orientica", volume: "80 ml", gender: "unisex", price: 194000,
+      image: "https://d1b50uin55dq3m.cloudfront.net/fit-in/800x800/db171a8c-141e-4a0b-af4f-28d85f70c7c1.jpeg"
+    },
+    {
+      id: 25, name: "Orientica Oud Saffron (caja)", fullName: "Orientica Oud Saffron 80 ml – Caja económica",
+      brand: "Orientica", volume: "80 ml", gender: "unisex", price: 116000,
+      image: "https://d1b50uin55dq3m.cloudfront.net/fit-in/800x800/5a10d4c4-d548-4524-8b50-7ebfa68773c6.webp"
+    },
+    {
+      id: 26, name: "Orientica Oud Saffron (estuche)", fullName: "Orientica Oud Saffron 80 ml – Estuche de lujo",
+      brand: "Orientica", volume: "80 ml", gender: "unisex", price: 194000,
+      image: "https://d1b50uin55dq3m.cloudfront.net/fit-in/800x800/038eeb64-507a-4149-a8c3-4505a4dc6b1c.webp"
+    },
+    {
+      id: 27, name: "Lattafa Oud Amethyst", fullName: "Lattafa Oud Amethyst 100 ml – Estuche de lujo",
+      brand: "Lattafa", volume: "100 ml", gender: "unisex", price: 194000,
+      image: "https://d1b50uin55dq3m.cloudfront.net/fit-in/800x800/635cee2a-2d69-4cc0-aa4c-0ec173b58794.webp"
+    },
+    {
+      id: 28, name: "Lattafa Oud for Glory", fullName: "Lattafa Oud for Glory 100 ml – Estuche lujo",
+      brand: "Lattafa", volume: "100 ml", gender: "unisex", price: 194000,
+      image: "https://d1b50uin55dq3m.cloudfront.net/fit-in/800x800/6e115fcd-b985-42bf-8462-66b8d5a3e8b1.webp"
+    },
+    {
+      id: 29, name: "Lattafa Honor & Glory", fullName: "Lattafa Honor & Glory 100 ml – Estuche de lujo",
+      brand: "Lattafa", volume: "100 ml", gender: "unisex", price: 194000,
+      image: "https://d1b50uin55dq3m.cloudfront.net/fit-in/800x800/b6d4ecf7-6caa-4b45-a58f-9f56e1fb30eb.webp"
+    },
+    {
+      id: 30, name: "Montale Black Oud", fullName: "Montale Black Oud 100 ml",
+      brand: "Montale", volume: "100 ml", gender: "unisex", price: 124000,
+      image: "https://d1b50uin55dq3m.cloudfront.net/fit-in/800x800/889fca0d-c273-49a9-ba7e-405eb7e7caf5.webp"
+    },
+    // ── ESTUCHES CON CREMA ──
+    {
+      id: 31, name: "Odyssey Candee (estuche con crema)", fullName: "Odyssey Candee – Estuche con crema",
+      brand: "Odyssey", volume: "Estuche", gender: "mujer", price: 230000,
+      image: "https://d1b50uin55dq3m.cloudfront.net/fit-in/800x800/f24935bd-314a-4378-a6da-6c8694c5a202.jpg"
+    },
+    {
+      id: 32, name: "Yara Candy (estuche con crema)", fullName: "Yara Candy – Estuche con crema",
+      brand: "Lattafa", volume: "Estuche", gender: "mujer", price: 220000,
+      image: "https://d1b50uin55dq3m.cloudfront.net/fit-in/800x800/a9e3c3be-4c71-4353-b563-fdb2f99235f5.jpg"
+    },
+    {
+      id: 33, name: "Yara Rosada (estuche con crema)", fullName: "Yara Rosada – Estuche con crema",
+      brand: "Lattafa", volume: "Estuche", gender: "mujer", price: 220000,
+      image: "https://d1b50uin55dq3m.cloudfront.net/fit-in/800x800/2c2fb2f3-4ed3-4ab0-9dda-e1a556b67ddf.jpg"
+    },
+    // ── ORIGINALES ──
+    {
+      id: 34, name: "Jean Lowe Ombre", fullName: "Jean Lowe Ombre – Maison Alhambra (original)",
+      brand: "Maison Alhambra", volume: "Original", gender: "unisex", price: 350000,
+      image: "https://d1b50uin55dq3m.cloudfront.net/fit-in/800x800/e19babac-3a92-45ca-a779-96e95d8af185.png"
+    },
+    {
+      id: 35, name: "Najdia Lattafa", fullName: "Najdia by Lattafa (original)",
+      brand: "Lattafa", volume: "Original", gender: "unisex", price: 280000,
+      image: "https://d1b50uin55dq3m.cloudfront.net/fit-in/800x800/55a98f9a-9949-4f83-a16b-e4245c940ae3.jpg"
+    },
+    {
+      id: 36, name: "Game of Spades Big", fullName: "Game of Spades Big EDP Unisex (original)",
+      brand: "Alexandre.J", volume: "Original", gender: "unisex", price: 380000,
+      image: "https://d1b50uin55dq3m.cloudfront.net/fit-in/800x800/0b20a7d5-3b94-4835-8fdb-0aaaa1a64b43.jpg"
+    },
+    {
+      id: 37, name: "Rumba Original", fullName: "Rumba – Eau de Toilette (original)",
+      brand: "Balenciaga", volume: "Original", gender: "mujer", price: 340000,
+      image: "https://d1b50uin55dq3m.cloudfront.net/fit-in/800x800/ccd01de1-eb00-4af7-90bd-05d33a4e6e89.jpg"
+    },
+    // ── RELOJES ──
+    {
+      id: 38, name: "Reloj QYQ Acero Gris Azul (RJM 1)", fullName: "Reloj QYQ Original – Acero Gris Azul RJM 1",
+      brand: "QYQ", volume: "Reloj", gender: "relojes", price: 150000,
+      image: "https://d1b50uin55dq3m.cloudfront.net/fit-in/800x800/a460247a-b3f3-4ad9-9650-e1a2d9c9237e"
+    },
+    {
+      id: 39, name: "Reloj QYQ Acero Gris Azul (RJM 3)", fullName: "Reloj QYQ Quartz – Acero Gris Azul RJM 3",
+      brand: "QYQ", volume: "Reloj", gender: "relojes", price: 174000,
+      image: "https://d1b50uin55dq3m.cloudfront.net/fit-in/800x800/c1e84ccb-09f4-4c29-80b1-167d78ee002c"
+    },
+    {
+      id: 40, name: "Reloj QYQ Cuero Acero Gris (RJM 6)", fullName: "Reloj QYQ Quartz – Cuero Acero Gris RJM 6",
+      brand: "QYQ", volume: "Reloj", gender: "relojes", price: 150000,
+      image: "https://d1b50uin55dq3m.cloudfront.net/fit-in/800x800/bd1a2a36-122b-41ac-830e-7a8fd71faf31"
+    },
+    {
+      id: 41, name: "Reloj Dama QYQ Acero Gris Azul (RJD 3)", fullName: "Reloj Dama QYQ Quartz – Acero Gris Azul RJD 3",
+      brand: "QYQ", volume: "Reloj", gender: "relojes", price: 150000,
+      image: "https://d1b50uin55dq3m.cloudfront.net/fit-in/800x800/bcb82972-c98c-4821-9f1b-0bd4d522c130"
+    },
+    {
+      id: 42, name: "Reloj Dama QYQ Acero Gris Negro (RJD 4)", fullName: "Reloj Dama QYQ Quartz – Acero Gris Negro RJD 4",
+      brand: "QYQ", volume: "Reloj", gender: "relojes", price: 150000,
+      image: "https://d1b50uin55dq3m.cloudfront.net/fit-in/800x800/e33a7528-fe58-4eac-9abe-6e99b768e52e"
     }
   ];
 
@@ -710,7 +808,7 @@
       <article class="product-card" data-gender="${p.gender}">
         <div class="product-img-wrap">
           <img src="${p.image}" alt="${p.fullName}" loading="lazy" />
-          <span class="product-gender-badge">${p.gender === 'mujer' ? '♀ Mujer' : p.gender === 'hombre' ? '♂ Hombre' : '⚥ Unisex'}</span>
+          <span class="product-gender-badge">${p.gender === 'mujer' ? '♀ Mujer' : p.gender === 'hombre' ? '♂ Hombre' : p.gender === 'unisex' ? '⚥ Unisex' : '⌚ Reloj'}</span>
         </div>
         <div class="product-info">
           <div class="product-brand">${p.brand}</div>
