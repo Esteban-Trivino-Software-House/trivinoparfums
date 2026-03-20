@@ -241,7 +241,7 @@
 <section class="hero">
   <p class="hero-label">Fragancias Premium 1.1 Importadas</p>
   <h1>El arte de oler <em>increíble</em></h1>
-  <p>Más de 500 fragancias con duración de 8 a 12 horas. Calidad premium al mejor precio.</p>
+  <p>Más de <span id="heroCount"></span> fragancias con duración de 8 a 12 horas. Calidad premium al mejor precio.</p>
   <div class="hero-badge">Envíos a todo Colombia · Garantía total</div>
 </section>
 
@@ -256,7 +256,7 @@
   <button class="filter-btn" data-filter="combos">🎁 Combos</button>
   <button class="filter-btn" data-filter="relojes">⌚ Relojes</button>
 </div>
-<div class="results-bar">Mostrando <span id="resultsCount">585</span> productos</div>
+<div class="results-bar">Mostrando <span id="resultsCount">0</span> productos</div>
 
 <!-- PRODUCTS -->
 <section class="products-section">
@@ -1053,6 +1053,7 @@
   scrollTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
   // ── INIT ──
+  $('heroCount').textContent = products.length;
   renderProducts();
   updateCartUI();
 </script>
