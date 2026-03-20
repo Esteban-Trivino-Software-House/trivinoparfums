@@ -1,22 +1,25 @@
 #!/usr/bin/env python3
 """
 Trivino Parfums — Generador de catálogo en PDF
-Produce un PDF buscable con todos los productos activos del catálogo.
+Produce un PDF buscable con todos los productos activos del catálogo,
+incluyendo una imagen por cada perfume.
 """
 
+import io
 import json
 import re
 import urllib.request
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from reportlab.lib import colors
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.styles import ParagraphStyle
 from reportlab.lib.units import mm
 from reportlab.platypus import (
     BaseDocTemplate, Frame, PageTemplate, Paragraph,
-    Spacer, Table, TableStyle, HRFlowable, KeepTogether
+    Spacer, Table, TableStyle, HRFlowable, NextPageTemplate, PageBreak
 )
-from reportlab.pdfbase import pdfmetrics
-from reportlab.pdfbase.ttfonts import TTFont
+from reportlab.platypus import Image as RLImage
+from PIL import Image as PILImage
 
 # ── Colores ──
 DARK       = colors.HexColor("#0D0D0D")
@@ -27,10 +30,10 @@ GOLD_LIGHT = colors.HexColor("#E8C96A")
 TEXT       = colors.HexColor("#F0EDE8")
 TEXT_MUTED = colors.HexColor("#8A8178")
 BORDER     = colors.HexColor("#2A2A2A")
-WHITE      = colors.white
 
 GRAPHQL_URL = "https://graphql.ecometri.shop/graphql"
 ORIGIN      = "https://tokeperfumeria.ecometri.shop"
+IMAGE_CDN   = "https://d1b50uin55dq3m.cloudfront.net/fit-in/200x200/"
 OUTPUT_PATH = "catalogo-trivino-parfums.pdf"
 
 CATEGORY_LABELS = {
@@ -61,33 +64,27 @@ QUERY = """
 """
 
 
-def fetch_products():
+def fetch_collections():
     body = json.dumps({"query": QUERY}).encode()
     req = urllib.request.Request(
         GRAPHQL_URL, data=body,
         headers={"Content-Type": "application/json",
                  "origin": ORIGIN, "referer": ORIGIN + "/"}
     )
-    data = json.loads(urllib.request.urlopen(req, timeout=60).read())
-    return data["data"]["store"]["storeCatalogs"][0]["collections"]
+    return json.loads(urllib.request.urlopen(req, timeout=60).read()
+                      )["data"]["store"]["storeCatalogs"][0]["collections"]
 
 
 def classify(pid, by_slug):
-    originales = by_slug.get("originales", set())
-    relojes    = by_slug.get("relojes", set())
-    combos     = by_slug.get("combos-pago-de-contado", set())
-    arabes     = by_slug.get("arabes", set())
-    dama       = by_slug.get("dama", set())
-    caballero  = by_slug.get("caballero", set())
-
-    if pid in originales: return "originales"
-    if pid in relojes:    return "relojes"
-    if pid in combos:     return "combos"
-    if pid in arabes:     return "arabes"
-    in_d, in_c = pid in dama, pid in caballero
-    if in_d and in_c:     return "unisex"
-    if in_d:              return "mujer"
-    if in_c:              return "hombre"
+    if pid in by_slug.get("originales", set()):          return "originales"
+    if pid in by_slug.get("relojes", set()):              return "relojes"
+    if pid in by_slug.get("combos-pago-de-contado", set()): return "combos"
+    if pid in by_slug.get("arabes", set()):               return "arabes"
+    in_d = pid in by_slug.get("dama", set())
+    in_c = pid in by_slug.get("caballero", set())
+    if in_d and in_c: return "unisex"
+    if in_d:          return "mujer"
+    if in_c:          return "hombre"
     return "unisex"
 
 
@@ -99,197 +96,209 @@ def build_products(collections):
     by_slug = {c["slug"]: {p["id"] for p in c["products"]} for c in collections}
     all_map = {p["id"]: p for c in collections for p in c["products"]}
     todo    = by_slug.get("", set())
-
     products = []
     for pid in todo:
         p = all_map[pid]
         if not p.get("active", True):
             continue
         wholesale = p.get("discountPrice") or p.get("price") or 0
-        price = int(wholesale * 2)
-        gender = classify(pid, by_slug)
+        imgs = sorted(p.get("productImages") or [], key=lambda x: x.get("order", 0))
+        first_img = imgs[0]["pictureUrl"] if imgs else None
+        img_url = (IMAGE_CDN + first_img) if first_img and not first_img.startswith("http") else first_img
         products.append({
-            "name":   (p.get("name") or "").strip(),
-            "sku":    (p.get("sku") or "")[:6].upper(),
-            "gender": gender,
-            "price":  price,
+            "name":    (p.get("name") or "").strip(),
+            "sku":     (p.get("sku") or "")[:6].upper(),
+            "gender":  classify(pid, by_slug),
+            "price":   int(wholesale * 2),
+            "img_url": img_url,
+            "img_data": None,
         })
     return products
 
 
-def strip_html(html):
-    return re.sub(r"<[^>]+>", "", html or "").strip()
+def download_image(product):
+    """Download and resize image to 120x120 JPEG bytes. Returns (idx, bytes_or_None)."""
+    url = product.get("img_url")
+    if not url:
+        return None
+    try:
+        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+        raw = urllib.request.urlopen(req, timeout=10).read()
+        img = PILImage.open(io.BytesIO(raw)).convert("RGB")
+        img.thumbnail((120, 120), PILImage.LANCZOS)
+        buf = io.BytesIO()
+        img.save(buf, format="JPEG", quality=70, optimize=True)
+        return buf.getvalue()
+    except Exception:
+        return None
+
+
+def fetch_images(products, workers=30):
+    print(f"  Descargando {len(products)} imágenes ({workers} en paralelo)…")
+    with ThreadPoolExecutor(max_workers=workers) as ex:
+        futures = {ex.submit(download_image, p): i for i, p in enumerate(products)}
+        done = 0
+        for fut in as_completed(futures):
+            idx = futures[fut]
+            products[idx]["img_data"] = fut.result()
+            done += 1
+            if done % 50 == 0 or done == len(products):
+                print(f"    {done}/{len(products)}", end="\r")
+    ok = sum(1 for p in products if p["img_data"])
+    print(f"\n  ✅ {ok} imágenes descargadas, {len(products)-ok} sin imagen")
 
 
 # ── PDF Builder ──
 def build_pdf(products):
-    W, H = A4  # 210 x 297 mm
+    W, H = A4
+    IMG_SIZE = 18 * mm   # tamaño imagen en el PDF
+    COLS     = 3
+    COL_W    = (W - 28*mm) / COLS   # 14mm margen c/lado
 
     doc = BaseDocTemplate(
-        OUTPUT_PATH,
-        pagesize=A4,
-        leftMargin=14*mm,
-        rightMargin=14*mm,
-        topMargin=14*mm,
-        bottomMargin=14*mm,
+        OUTPUT_PATH, pagesize=A4,
+        leftMargin=14*mm, rightMargin=14*mm,
+        topMargin=18*mm, bottomMargin=12*mm,
         title="Catálogo Trivino Parfums",
         author="Trivino Parfums",
         subject="Catálogo de fragancias premium",
     )
 
-    frame = Frame(
-        doc.leftMargin, doc.bottomMargin,
-        W - doc.leftMargin - doc.rightMargin,
-        H - doc.topMargin - doc.bottomMargin,
-        id="main"
-    )
+    frame = Frame(doc.leftMargin, doc.bottomMargin,
+                  W - 28*mm, H - 30*mm, id="main")
 
     def draw_header(canvas, doc):
         canvas.saveState()
-        # Top gold line
         canvas.setFillColor(GOLD)
-        canvas.rect(0, H - 8*mm, W, 8*mm, fill=1, stroke=0)
-        # Brand
+        canvas.rect(0, H - 10*mm, W, 10*mm, fill=1, stroke=0)
         canvas.setFillColor(DARK)
-        canvas.setFont("Helvetica-Bold", 13)
-        canvas.drawCentredString(W/2, H - 5.8*mm, "TRIVINO PARFUMS")
-        # Bottom bar
+        canvas.setFont("Helvetica-Bold", 12)
+        canvas.drawCentredString(W/2, H - 6.5*mm, "TRIVINO PARFUMS  ·  CATÁLOGO DE FRAGANCIAS")
         canvas.setFillColor(DARK3)
-        canvas.rect(0, 0, W, 7*mm, fill=1, stroke=0)
+        canvas.rect(0, 0, W, 8*mm, fill=1, stroke=0)
         canvas.setFillColor(TEXT_MUTED)
-        canvas.setFont("Helvetica", 7)
-        canvas.drawString(14*mm, 2.5*mm, "Fragancias Premium · Envíos a todo Colombia")
-        canvas.drawRightString(W - 14*mm, 2.5*mm, f"Pág. {doc.page}")
+        canvas.setFont("Helvetica", 6.5)
+        canvas.drawString(14*mm, 2.8*mm, "trivinoparfums  ·  WhatsApp +57 312 304 2983")
+        canvas.drawRightString(W - 14*mm, 2.8*mm, f"Pág. {doc.page}")
         canvas.restoreState()
 
     def draw_cover(canvas, doc):
         canvas.saveState()
         canvas.setFillColor(DARK)
         canvas.rect(0, 0, W, H, fill=1, stroke=0)
-        # Gold accent top
         canvas.setFillColor(GOLD)
         canvas.rect(0, H - 3*mm, W, 3*mm, fill=1, stroke=0)
         canvas.rect(0, 0, W, 3*mm, fill=1, stroke=0)
-        # Title
         canvas.setFillColor(GOLD)
-        canvas.setFont("Helvetica-Bold", 38)
-        canvas.drawCentredString(W/2, H/2 + 35*mm, "TRIVINO")
-        canvas.setFont("Helvetica", 28)
-        canvas.drawCentredString(W/2, H/2 + 18*mm, "P A R F U M S")
-        # Divider
+        canvas.setFont("Helvetica-Bold", 40)
+        canvas.drawCentredString(W/2, H/2 + 38*mm, "TRIVINO")
+        canvas.setFont("Helvetica", 30)
+        canvas.drawCentredString(W/2, H/2 + 20*mm, "P A R F U M S")
         canvas.setStrokeColor(GOLD)
         canvas.setLineWidth(0.5)
-        canvas.line(50*mm, H/2 + 10*mm, W - 50*mm, H/2 + 10*mm)
-        # Subtitle
+        canvas.line(40*mm, H/2 + 12*mm, W - 40*mm, H/2 + 12*mm)
         canvas.setFillColor(TEXT_MUTED)
         canvas.setFont("Helvetica", 11)
-        canvas.drawCentredString(W/2, H/2 - 2*mm, "CATÁLOGO DE FRAGANCIAS PREMIUM")
+        canvas.drawCentredString(W/2, H/2, "CATÁLOGO DE FRAGANCIAS PREMIUM")
         canvas.setFont("Helvetica", 9)
-        canvas.drawCentredString(W/2, H/2 - 12*mm, f"{len(products)} fragancias disponibles · Envíos a todo Colombia")
-        # WhatsApp
+        canvas.drawCentredString(W/2, H/2 - 11*mm,
+            f"{len(products)} fragancias disponibles  ·  Envíos a todo Colombia")
         canvas.setFillColor(GOLD)
         canvas.setFont("Helvetica-Bold", 10)
         canvas.drawCentredString(W/2, H/2 - 28*mm, "📱 +57 312 304 2983")
         canvas.setFillColor(TEXT_MUTED)
         canvas.setFont("Helvetica", 8)
-        canvas.drawCentredString(W/2, H/2 - 36*mm, "trivinoparfums · Contáctanos por WhatsApp")
+        canvas.drawCentredString(W/2, H/2 - 37*mm, "Contáctanos por WhatsApp para hacer tu pedido")
         canvas.restoreState()
 
     cover_frame = Frame(0, 0, W, H, id="cover")
-    cover_template  = PageTemplate(id="cover",  frames=[cover_frame], onPage=draw_cover)
-    normal_template = PageTemplate(id="normal", frames=[frame],        onPage=draw_header)
-    doc.addPageTemplates([cover_template, normal_template])
+    doc.addPageTemplates([
+        PageTemplate(id="cover",  frames=[cover_frame], onPage=draw_cover),
+        PageTemplate(id="normal", frames=[frame],        onPage=draw_header),
+    ])
 
     # ── Styles ──
     cat_style = ParagraphStyle(
         "cat", fontName="Helvetica-Bold", fontSize=11,
-        textColor=GOLD, spaceAfter=4, spaceBefore=10,
+        textColor=GOLD, spaceAfter=3, spaceBefore=8,
     )
     name_style = ParagraphStyle(
-        "name", fontName="Helvetica-Bold", fontSize=7.5,
-        textColor=TEXT, leading=10,
+        "name", fontName="Helvetica-Bold", fontSize=6.8,
+        textColor=TEXT, leading=9,
     )
     sub_style = ParagraphStyle(
-        "sub", fontName="Helvetica", fontSize=6.5,
-        textColor=TEXT_MUTED, leading=9,
+        "sub", fontName="Helvetica", fontSize=6,
+        textColor=TEXT_MUTED, leading=8,
     )
     price_style = ParagraphStyle(
-        "price", fontName="Helvetica-Bold", fontSize=8,
+        "price", fontName="Helvetica-Bold", fontSize=7.5,
         textColor=GOLD_LIGHT,
     )
 
-    # ── Build story ──
-    from reportlab.platypus import NextPageTemplate, PageBreak
+    story = [NextPageTemplate("normal"), PageBreak()]
 
-    story = []
-
-    # Cover page
-    story.append(NextPageTemplate("normal"))
-    story.append(PageBreak())
-
-    # Group by category
     grouped = {g: [] for g in CATEGORY_ORDER}
     for p in products:
         grouped.setdefault(p["gender"], []).append(p)
-
-    COLS = 3
-    COL_W = (W - doc.leftMargin - doc.rightMargin) / COLS
 
     for gender in CATEGORY_ORDER:
         items = grouped.get(gender, [])
         if not items:
             continue
 
-        # Category header
         story.append(Paragraph(CATEGORY_LABELS.get(gender, gender), cat_style))
-        story.append(HRFlowable(width="100%", thickness=0.5, color=GOLD, spaceAfter=6))
+        story.append(HRFlowable(width="100%", thickness=0.5, color=GOLD, spaceAfter=5))
 
-        # Build rows of COLS items
         rows = [items[i:i+COLS] for i in range(0, len(items), COLS)]
-
         table_data = []
+
         for row in rows:
             cells = []
             for item in row:
+                # Image
+                if item["img_data"]:
+                    img = RLImage(io.BytesIO(item["img_data"]),
+                                  width=IMG_SIZE, height=IMG_SIZE)
+                    img.hAlign = "CENTER"
+                else:
+                    img = Spacer(IMG_SIZE, IMG_SIZE)
+
                 cell = [
-                    Paragraph(item["name"], name_style),
+                    img,
                     Spacer(1, 2),
+                    Paragraph(item["name"], name_style),
                     Paragraph(f"Cód. {item['sku']}", sub_style),
                     Paragraph(fmt_price(item["price"]), price_style),
                 ]
                 cells.append(cell)
-            # Pad row if less than COLS
             while len(cells) < COLS:
                 cells.append("")
             table_data.append(cells)
 
-        col_widths = [COL_W] * COLS
-        t = Table(table_data, colWidths=col_widths, repeatRows=0)
+        t = Table(table_data, colWidths=[COL_W] * COLS)
         t.setStyle(TableStyle([
-            ("VALIGN",      (0,0), (-1,-1), "TOP"),
-            ("TOPPADDING",  (0,0), (-1,-1), 6),
-            ("BOTTOMPADDING",(0,0),(-1,-1), 8),
-            ("LEFTPADDING", (0,0), (-1,-1), 6),
-            ("RIGHTPADDING",(0,0), (-1,-1), 6),
-            ("BACKGROUND",  (0,0), (-1,-1), DARK2),
+            ("VALIGN",       (0,0), (-1,-1), "TOP"),
+            ("ALIGN",        (0,0), (-1,-1), "CENTER"),
+            ("TOPPADDING",   (0,0), (-1,-1), 7),
+            ("BOTTOMPADDING",(0,0), (-1,-1), 8),
+            ("LEFTPADDING",  (0,0), (-1,-1), 5),
+            ("RIGHTPADDING", (0,0), (-1,-1), 5),
             ("ROWBACKGROUNDS",(0,0),(-1,-1), [DARK2, DARK3]),
-            ("GRID",        (0,0), (-1,-1), 0.3, BORDER),
-            ("LINEBELOW",   (0,0), (-1,-1), 0.3, BORDER),
+            ("GRID",         (0,0), (-1,-1), 0.3, BORDER),
         ]))
         story.append(t)
-        story.append(Spacer(1, 6))
+        story.append(Spacer(1, 5))
 
     doc.build(story)
 
 
 def main():
     print("🔄 Consultando API del proveedor…")
-    collections = fetch_products()
-
+    collections = fetch_collections()
     print("⚙️  Procesando productos…")
     products = build_products(collections)
     print(f"✅ {len(products)} productos activos")
-
+    fetch_images(products)
     print("📄 Generando PDF…")
     build_pdf(products)
     print(f"🎉 PDF generado: {OUTPUT_PATH}")
