@@ -223,12 +223,26 @@
     .scroll-top-btn:hover{transform:translateY(-3px)}
 
     /* ── CHAT WIDGET ── */
-    .chat-fab{position:fixed;bottom:28px;left:20px;z-index:150;display:flex;align-items:center;gap:10px;background:var(--dark3);border:1px solid var(--border-light);border-radius:50px;padding:10px 18px 10px 14px;cursor:pointer;box-shadow:0 4px 24px rgba(0,0,0,.5);transition:border-color .2s,transform .2s;font-family:'DM Sans',sans-serif}
-    .chat-fab:hover{border-color:var(--gold);transform:translateY(-2px)}
-    .chat-fab-icon{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-light));display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0}
-    .chat-fab-text{font-size:.78rem;font-weight:500;color:var(--text);line-height:1.2}
-    .chat-fab-sub{font-size:.65rem;color:var(--text-muted);display:block}
-    .chat-fab-dot{position:absolute;top:6px;left:38px;width:9px;height:9px;border-radius:50%;background:#25d366;border:2px solid var(--dark3)}
+    .chat-fab{position:fixed;bottom:24px;left:16px;z-index:150;display:flex;flex-direction:column;align-items:flex-start;gap:8px;cursor:pointer;font-family:'DM Sans',sans-serif;border:none;background:none;padding:0}
+    /* Bubble de preview */
+    .chat-fab-bubble{background:var(--dark2);border:1px solid var(--border-light);border-radius:16px 16px 16px 4px;padding:12px 16px;max-width:240px;box-shadow:0 8px 32px rgba(0,0,0,.5);display:flex;flex-direction:column;gap:6px;transition:transform .2s,box-shadow .2s;text-align:left;opacity:0;transform:translateY(10px) scale(.95);pointer-events:none}
+    .chat-fab-bubble.visible{opacity:1;transform:translateY(0) scale(1);pointer-events:auto;animation:bubbleIn .4s cubic-bezier(.34,1.56,.64,1)}
+    @keyframes bubbleIn{from{opacity:0;transform:translateY(12px) scale(.9)}to{opacity:1;transform:translateY(0) scale(1)}}
+    .chat-fab-bubble-header{display:flex;align-items:center;gap:8px}
+    .chat-fab-avatar{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-light));display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0}
+    .chat-fab-name{font-size:.72rem;font-weight:600;color:var(--text)}
+    .chat-fab-online{font-size:.6rem;color:#25d366;display:flex;align-items:center;gap:4px}
+    .chat-fab-online::before{content:'';width:5px;height:5px;border-radius:50%;background:#25d366;display:block}
+    .chat-fab-msg{font-size:.78rem;color:var(--text-muted);line-height:1.4}
+    .chat-fab-msg strong{color:var(--gold);font-weight:500}
+    .chat-fab-cta{font-size:.72rem;color:var(--gold);font-weight:500;display:flex;align-items:center;gap:4px;margin-top:2px}
+    .chat-fab-dismiss{position:absolute;top:-8px;right:-8px;width:20px;height:20px;border-radius:50%;background:var(--dark4);border:1px solid var(--border);color:var(--text-dim);font-size:.6rem;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:border-color .15s;z-index:1}
+    .chat-fab-dismiss:hover{border-color:var(--gold);color:var(--text)}
+    /* Botón ícono cuando está cerrado el bubble */
+    .chat-fab-btn{width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-light));display:flex;align-items:center;justify-content:center;font-size:1.3rem;box-shadow:0 4px 20px rgba(201,168,76,.4);transition:transform .2s,box-shadow .2s;flex-shrink:0;position:relative}
+    .chat-fab:hover .chat-fab-btn{transform:scale(1.08);box-shadow:0 6px 28px rgba(201,168,76,.5)}
+    .chat-fab-pulse{position:absolute;inset:-4px;border-radius:50%;border:2px solid rgba(201,168,76,.4);animation:fabPulse 2s ease-out infinite}
+    @keyframes fabPulse{0%{transform:scale(1);opacity:.6}100%{transform:scale(1.5);opacity:0}}
 
     .chat-panel{position:fixed;bottom:0;left:0;width:min(400px,100vw);height:min(600px,90vh);background:var(--dark2);border:1px solid var(--border);border-radius:0 20px 0 0;z-index:400;display:flex;flex-direction:column;transform:translateY(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);box-shadow:0 -8px 60px rgba(0,0,0,.6)}
     .chat-panel.open{transform:translateY(0)}
@@ -372,9 +386,22 @@
 
 <!-- CHAT WIDGET -->
 <button class="chat-fab" id="chatFab" aria-label="Abrir asistente de fragancias">
-  <span class="chat-fab-dot"></span>
-  <span class="chat-fab-icon">✨</span>
-  <span class="chat-fab-text">Asistente<span class="chat-fab-sub">¿Qué buscas hoy?</span></span>
+  <div class="chat-fab-bubble" id="chatFabBubble" style="position:relative">
+    <button class="chat-fab-dismiss" id="chatFabDismiss" aria-label="Cerrar">✕</button>
+    <div class="chat-fab-bubble-header">
+      <div class="chat-fab-avatar">✨</div>
+      <div>
+        <div class="chat-fab-name">Parfum · Asesor IA</div>
+        <div class="chat-fab-online">En línea ahora</div>
+      </div>
+    </div>
+    <div class="chat-fab-msg" id="chatFabMsg">¿Para qué <strong>ocasión</strong> buscas una fragancia?</div>
+    <div class="chat-fab-cta">Pregúntame →</div>
+  </div>
+  <div class="chat-fab-btn">
+    <span class="chat-fab-pulse"></span>
+    🌹
+  </div>
 </button>
 
 <div class="chat-panel" id="chatPanel" role="dialog" aria-label="Asistente Parfum">
@@ -1355,6 +1382,7 @@ ${catalogCtx}`;
     chatOpen = true;
     $('chatPanel').classList.add('open');
     $('chatFab').style.display = 'none';
+    fabBubble.classList.remove('visible');
     if (chatHistory.length === 0) {
       addChatMessage('bot', '¡Hola! Soy <strong>Parfum</strong>, tu asesor de fragancias 🌹<br><br>Cuéntame: ¿para qué ocasión buscas un perfume? ¿Tienes alguna fragancia favorita o una marca que te guste?');
     }
@@ -1364,7 +1392,46 @@ ${catalogCtx}`;
     chatOpen = false;
     $('chatPanel').classList.remove('open');
     $('chatFab').style.display = '';
+    if (!fabDismissed) fabBubble.classList.add('visible');
   }
+
+  // ── CHAT FAB: bubble con mensajes rotativos ──
+  const FAB_MESSAGES = [
+    '¿Para qué <strong>ocasión</strong> buscas una fragancia?',
+    '¿Quieres un perfume <strong>fresco</strong>, <strong>intenso</strong> o <strong>dulce</strong>?',
+    'Te ayudo a encontrar el perfume <strong>perfecto</strong> para ti 🌹',
+    '¿Buscas un <strong>regalo especial</strong>? Te oriento.',
+    '¿Cuál es tu <strong>presupuesto</strong>? Tengo opciones para todos.',
+  ];
+  let fabMsgIdx = 0;
+  const fabBubble = $('chatFabBubble');
+  const fabMsg = $('chatFabMsg');
+  const fabDismiss = $('chatFabDismiss');
+  let fabDismissed = false;
+
+  // Mostrar bubble después de 2.5s
+  setTimeout(() => {
+    if (!chatOpen && !fabDismissed) fabBubble.classList.add('visible');
+  }, 2500);
+
+  // Rotar mensajes cada 4s
+  setInterval(() => {
+    if (!chatOpen && !fabDismissed && fabBubble.classList.contains('visible')) {
+      fabMsgIdx = (fabMsgIdx + 1) % FAB_MESSAGES.length;
+      fabBubble.style.opacity = '0';
+      setTimeout(() => {
+        fabMsg.innerHTML = FAB_MESSAGES[fabMsgIdx];
+        fabBubble.style.opacity = '1';
+      }, 300);
+    }
+  }, 4000);
+
+  // Cerrar bubble sin abrir chat
+  fabDismiss.addEventListener('click', e => {
+    e.stopPropagation();
+    fabDismissed = true;
+    fabBubble.classList.remove('visible');
+  });
 
   $('chatFab').addEventListener('click', openChatPanel);
   $('chatClose').addEventListener('click', closeChatPanel);
