@@ -33,6 +33,7 @@ QUERY = """
           description
           price
           discountPrice
+          active
           productImages {
             pictureUrl
             order
@@ -116,8 +117,8 @@ def build_products(data):
             return "hombre"
         return "unisex"
 
-    # Use "todo" collection (slug="") as the master list
-    todo = by_slug.get("", set())
+    # Use "todo" collection (slug="") as the master list, solo productos activos
+    todo = {pid for pid in by_slug.get("", set()) if all_products_map[pid].get("active", True)}
     if not todo:
         # Fallback: union of all
         todo = set(all_products_map.keys())
