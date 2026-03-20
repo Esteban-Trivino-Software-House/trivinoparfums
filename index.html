@@ -1185,7 +1185,7 @@
   $('waBtn').addEventListener('click', () => {
     if (!cart.length) return;
     const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
-    const lines = cart.map(i => `  • ${i.name} x${i.qty} — ${fmt(i.price * i.qty)}`).join('\n');
+    const lines = cart.map(i => `  • ${i.name} x${i.qty} — ${fmt(i.price * i.qty)}\n    _Cód: ${i.sku.toUpperCase()}_`).join('\n');
     const msg = `🌸 *Pedido en Trivino Parfums*\n━━━━━━━━━━━━━━━━━━━━━\n\n*Productos:*\n${lines}\n\n━━━━━━━━━━━━━━━━━━━━━\n💰 *Total: ${fmt(total)}*\n\n_Por favor confirma disponibilidad y método de pago. ¡Gracias!_ 🙏`;
     window.open('https://wa.me/573123042983?text=' + encodeURIComponent(msg), '_blank');
   });
