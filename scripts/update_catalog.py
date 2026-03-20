@@ -181,17 +181,22 @@ def update_html(js_array):
     with open(HTML_PATH, "r", encoding="utf-8") as f:
         html = f.read()
 
+    pattern = r"(const products\s*=\s*)\[[\s\S]*?\];"
+    if not re.search(pattern, html):
+        print("⚠️  No se encontró el array de productos en index.html")
+        sys.exit(1)
+
     # Replace the products array between markers
     new_html = re.sub(
-        r"(const products\s*=\s*)\[[\s\S]*?\];",
+        pattern,
         lambda m: m.group(1) + js_array + ";",
         html,
         count=1,
     )
 
     if new_html == html:
-        print("⚠️  No se encontró el array de productos en index.html")
-        sys.exit(1)
+        print("ℹ️  Catálogo sin cambios, no se requiere actualización.")
+        return
 
     with open(HTML_PATH, "w", encoding="utf-8") as f:
         f.write(new_html)
