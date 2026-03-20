@@ -977,7 +977,9 @@
 
   // ── COMPARTIR PRODUCTO ──
   $('modalShare').addEventListener('click', () => {
-    navigator.clipboard.writeText(location.href).then(() => showToast('🔗 Link copiado'));
+    const base = location.href.split('?')[0].replace(/\/$/, '');
+    const shareUrl = base + '/p/' + modalProduct.sku;
+    navigator.clipboard.writeText(shareUrl).then(() => showToast('🔗 Link copiado'));
   });
 
   // ── DEEP LINK: abrir producto si viene ?p=SKU en la URL ──

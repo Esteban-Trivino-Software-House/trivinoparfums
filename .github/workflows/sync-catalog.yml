@@ -24,16 +24,19 @@ jobs:
       - name: Actualizar catálogo
         run: python scripts/update_catalog.py
 
+      - name: Regenerar páginas de producto
+        run: python scripts/generate_product_pages.py
+
       - name: Verificar cambios
         id: changes
         run: |
-          git diff --quiet index.html && echo "changed=false" >> $GITHUB_OUTPUT || echo "changed=true" >> $GITHUB_OUTPUT
+          git diff --quiet && echo "changed=false" >> $GITHUB_OUTPUT || echo "changed=true" >> $GITHUB_OUTPUT
 
       - name: Commit y push si hay cambios
         if: steps.changes.outputs.changed == 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add index.html
+          git add index.html p/
           git commit -m "chore: sync automático del catálogo $(date +'%Y-%m-%d')"
           git push
