@@ -44,6 +44,8 @@
     .search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--text-muted);pointer-events:none}
     .cart-btn{background:var(--gold);border:none;color:var(--dark);padding:9px 18px;border-radius:6px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:.8rem;font-weight:600;display:flex;align-items:center;gap:8px;transition:background .2s;white-space:nowrap;letter-spacing:.03em}
     .cart-btn:hover{background:var(--gold-light)}
+    .cart-btn-label{display:inline}
+    .cart-count{background:var(--dark);color:var(--gold);border-radius:50%;width:18px;height:18px;font-size:.65rem;font-weight:700;display:flex;align-items:center;justify-content:center}
     .cart-count{background:var(--dark);color:var(--gold);border-radius:50%;width:18px;height:18px;font-size:.65rem;font-weight:700;display:flex;align-items:center;justify-content:center}
 
     /* ── HERO ── */
@@ -73,7 +75,7 @@
     .filter-btn.active{color:var(--gold);border-bottom-color:var(--gold)}
 
     /* ── RESULTS BAR ── */
-    .results-bar{padding:12px 24px;display:flex;align-items:center;justify-content:space-between;font-family:'DM Sans',sans-serif;font-size:.75rem;color:var(--text-dim);border-bottom:1px solid var(--border);background:var(--dark)}
+    .results-bar{display:none}
     .results-count{color:var(--gold);font-weight:500}
 
     /* ── GRID ── */
@@ -108,7 +110,7 @@
     .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:300;opacity:0;pointer-events:none;transition:opacity .3s;display:flex;align-items:center;justify-content:center;padding:20px}
     .modal-overlay.open{opacity:1;pointer-events:all}
 
-    .modal{background:var(--dark2);border:1px solid var(--border);border-radius:20px;width:100%;max-width:860px;max-height:92vh;overflow:hidden;display:flex;flex-direction:column;transform:scale(.96) translateY(24px);transition:transform .35s cubic-bezier(.4,0,.2,1);box-shadow:0 40px 120px rgba(0,0,0,.8)}
+    .modal{background:var(--dark2);border:1px solid var(--border);border-radius:20px;width:100%;max-width:980px;max-height:92vh;overflow:hidden;display:flex;flex-direction:column;transform:scale(.96) translateY(24px);transition:transform .35s cubic-bezier(.4,0,.2,1);box-shadow:0 40px 120px rgba(0,0,0,.8)}
     .modal-overlay.open .modal{transform:scale(1) translateY(0)}
 
     .modal-header{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;border-bottom:1px solid var(--border);flex-shrink:0;background:var(--dark3)}
@@ -118,7 +120,7 @@
     .modal-close{background:var(--dark3);border:1px solid var(--border);color:var(--text);width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:border-color .2s;flex-shrink:0}
     .modal-close:hover{border-color:var(--gold)}
 
-    .modal-body{display:grid;grid-template-columns:1fr 1fr;overflow-y:auto;flex:1}
+    .modal-body{display:grid;grid-template-columns:1fr 1fr;overflow-y:auto;flex:1;min-height:0}
 
     /* ── CAROUSEL (scroll-snap nativo) ── */
     .modal-gallery{background:#0a0a0a;display:flex;flex-direction:column;position:relative}
@@ -149,7 +151,7 @@
     .gallery-thumb img{width:100%;height:100%;object-fit:cover;display:block}
 
     /* Details */
-    .modal-details{padding:24px;display:flex;flex-direction:column;gap:16px;overflow-y:auto}
+    .modal-details{padding:28px;display:flex;flex-direction:column;gap:18px;overflow-y:auto}
     .modal-name{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;line-height:1.25;color:var(--text)}
     .modal-sku{font-size:.72rem;color:var(--text-muted);letter-spacing:.05em}
     .modal-sku span{color:var(--text);font-weight:500}
@@ -157,7 +159,7 @@
     .modal-price-label{font-size:.7rem;color:var(--text-muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:.1em}
 
     /* Description — override all supplier inline colors */
-    .modal-desc{font-size:.83rem;color:var(--text-muted);line-height:1.7;max-height:130px;overflow-y:auto;padding-right:4px}
+    .modal-desc{font-size:.84rem;color:var(--text-muted);line-height:1.75;padding-right:4px;flex:1}
     .modal-desc::-webkit-scrollbar{width:3px}
     .modal-desc::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
     .modal-desc *{color:var(--text-muted) !important;background-color:transparent !important}
@@ -175,9 +177,12 @@
     .qty-row button:hover{background:var(--gold);color:var(--dark)}
     .qty-row .qty-display{padding:0 20px;font-size:1rem;font-weight:600;min-width:52px;text-align:center;background:var(--dark2)}
 
-    .modal-add-btn{width:100%;background:var(--gold);color:var(--dark);border:none;padding:16px;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:.88rem;font-weight:600;cursor:pointer;transition:background .2s,transform .1s;letter-spacing:.04em;text-transform:uppercase}
+    .modal-add-btn{flex:1;background:var(--gold);color:var(--dark);border:none;padding:16px;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:.88rem;font-weight:600;cursor:pointer;transition:background .2s,transform .1s;letter-spacing:.04em;text-transform:uppercase}
     .modal-add-btn:hover{background:var(--gold-light)}
     .modal-add-btn:active{transform:scale(.98)}
+    .modal-actions-row{display:flex;gap:10px;align-items:stretch}
+    .modal-share-btn{background:var(--dark3);border:1px solid var(--border);color:var(--text-muted);width:50px;border-radius:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:border-color .2s,color .2s}
+    .modal-share-btn:hover{border-color:var(--gold);color:var(--gold)}
 
     /* ── CART DRAWER ── */
     .cart-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;opacity:0;pointer-events:none;transition:opacity .3s}
@@ -238,6 +243,8 @@
       .modal-price{font-size:1.35rem}
       /* Header móvil */
       .header-top{padding:0 14px;height:54px}
+      .cart-btn-label{display:none}
+      .cart-btn{padding:9px 12px}
       .search-input{width:140px}
       .search-input:focus{width:160px}
       /* Hero debajo del header unificado */
@@ -263,7 +270,7 @@
       </div>
       <button class="cart-btn" id="openCartBtn">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-        Carrito
+        <span class="cart-btn-label">Carrito</span>
         <span class="cart-count" id="cartCount">0</span>
       </button>
     </div>
@@ -326,13 +333,10 @@
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal" id="productModal" role="dialog" aria-modal="true">
     <div class="modal-header">
-      <span class="modal-header-brand" id="modalBrand"></span>
-      <div style="display:flex;gap:8px;align-items:center">
-        <button class="modal-close" id="modalShare" aria-label="Compartir" title="Copiar link del producto">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-        </button>
-        <button class="modal-close" id="modalClose" aria-label="Cerrar">✕</button>
+      <div class="modal-header-info">
+        <span class="modal-header-brand" id="modalBrand"></span>
       </div>
+      <button class="modal-close" id="modalClose" aria-label="Cerrar">✕</button>
     </div>
     <div class="modal-body">
       <!-- Gallery / Carousel -->
@@ -364,7 +368,12 @@
             <button id="qtyPlus">+</button>
           </div>
         </div>
-        <button class="modal-add-btn" id="modalAddBtn">Agregar al carrito</button>
+        <div class="modal-actions-row">
+          <button class="modal-add-btn" id="modalAddBtn">Agregar al carrito</button>
+          <button class="modal-share-btn" id="modalShare" aria-label="Compartir" title="Copiar link del producto">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+          </button>
+        </div>
       </div>
     </div>
   </div>
