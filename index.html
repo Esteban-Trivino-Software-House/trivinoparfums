@@ -275,16 +275,8 @@
       </button>
     </div>
   </div>
-  <div class="filters-bar">
+  <div class="filters-bar" id="filtersBar">
     <span class="filter-label">Colección</span>
-    <button class="filter-btn active" data-filter="all">✨ Todos</button>
-    <button class="filter-btn" data-filter="originales">💎 Originales</button>
-    <button class="filter-btn" data-filter="mujer">♀ Mujer</button>
-    <button class="filter-btn" data-filter="hombre">♂ Hombre</button>
-    <button class="filter-btn" data-filter="unisex">⚥ Unisex</button>
-    <button class="filter-btn" data-filter="arabes">🌙 Árabes</button>
-    <button class="filter-btn" data-filter="combos">🎁 Combos</button>
-    <button class="filter-btn" data-filter="relojes">⌚ Relojes</button>
   </div>
 </header>
 
@@ -1112,16 +1104,34 @@
     window.open('https://wa.me/573123042983?text=' + encodeURIComponent(msg), '_blank');
   });
 
-  // ── FILTERS ──
-  document.querySelectorAll('.filter-btn').forEach(btn => {
+  // ── FILTERS: generar dinámicamente solo categorías con productos ──
+  const CATEGORY_META = [
+    { key: 'all',        label: '✨ Todos' },
+    { key: 'originales', label: '💎 Originales' },
+    { key: 'mujer',      label: '♀ Mujer' },
+    { key: 'hombre',     label: '♂ Hombre' },
+    { key: 'unisex',     label: '⚥ Unisex' },
+    { key: 'arabes',     label: '🌙 Árabes' },
+    { key: 'combos',     label: '🎁 Combos' },
+    { key: 'relojes',    label: '⌚ Relojes' },
+  ];
+  const usedGenders = new Set(products.map(p => p.gender));
+  const filtersBar = $('filtersBar');
+  CATEGORY_META.forEach(({ key, label }) => {
+    if (key !== 'all' && !usedGenders.has(key)) return; // ocultar vacías
+    const btn = document.createElement('button');
+    btn.className = 'filter-btn' + (key === 'all' ? ' active' : '');
+    btn.dataset.filter = key;
+    btn.textContent = label;
     btn.addEventListener('click', () => {
       document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      activeFilter = btn.dataset.filter;
+      activeFilter = key;
       searchTerm = '';
       $('searchInput').value = '';
       renderProducts();
     });
+    filtersBar.appendChild(btn);
   });
 
   // ── SEARCH ──
