@@ -950,7 +950,7 @@
   function getFiltered() {
     return products.filter(p => {
       const mf = activeFilter === 'all' || p.gender === activeFilter;
-      const ms = !searchTerm || p.name.toLowerCase().includes(searchTerm) || p.brand.toLowerCase().includes(searchTerm);
+      const ms = !searchTerm || p.name.toLowerCase().includes(searchTerm) || p.brand.toLowerCase().includes(searchTerm) || p.sku.toLowerCase().includes(searchTerm);
       return mf && ms;
     });
   }
