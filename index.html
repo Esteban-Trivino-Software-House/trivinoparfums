@@ -49,7 +49,7 @@
     .cart-count{background:var(--dark);color:var(--gold);border-radius:50%;width:18px;height:18px;font-size:.65rem;font-weight:700;display:flex;align-items:center;justify-content:center}
 
     /* ── HERO ── */
-    .hero{margin-top:104px;min-height:62vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:80px 20px 60px;position:relative;overflow:hidden;background:var(--dark)}
+    .hero{margin-top:134px;min-height:62vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:80px 20px 60px;position:relative;overflow:hidden;background:var(--dark)}
     .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 120% 80% at 50% 0%,rgba(201,168,76,.13) 0%,transparent 65%),radial-gradient(ellipse 60% 50% at 80% 60%,rgba(201,168,76,.05) 0%,transparent 50%);pointer-events:none}
     .hero::after{content:'';position:absolute;left:50%;bottom:0;transform:translateX(-50%);width:1px;height:60px;background:linear-gradient(to bottom,var(--gold),transparent)}
     .hero-inner{position:relative;z-index:1;max-width:680px;margin:0 auto}
@@ -101,6 +101,17 @@
     .product-price-label{font-size:.6rem;color:var(--text-dim);display:block;letter-spacing:.05em}
     .view-btn{background:transparent;border:1px solid var(--border);color:var(--text-muted);padding:8px 14px;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:.72rem;font-weight:400;cursor:pointer;transition:border-color .2s,color .2s,background .2s;white-space:nowrap}
     .view-btn:hover{border-color:var(--gold);color:var(--gold);background:var(--gold-dim)}
+    .card-add-btn{width:100%;background:transparent;border:1px solid var(--border);color:var(--text-muted);padding:9px;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:.75rem;font-weight:500;cursor:pointer;transition:all .2s;margin-top:8px;letter-spacing:.02em}
+    .card-add-btn:hover{background:var(--gold);border-color:var(--gold);color:var(--dark);font-weight:700}
+    .trust-bar{width:100%;background:var(--gold);color:var(--dark);display:flex;align-items:center;justify-content:center;gap:12px;padding:6px 16px;font-family:'DM Sans',sans-serif;font-size:.68rem;font-weight:600;letter-spacing:.04em;flex-wrap:wrap;text-align:center}
+    .trust-sep{opacity:.4}
+    .hero-cta{margin-top:28px}
+    .hero-cta-btn{background:var(--gold);color:var(--dark);border:none;padding:14px 32px;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:.88rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:8px;letter-spacing:.04em;text-transform:uppercase;transition:background .2s,transform .15s;box-shadow:0 4px 24px rgba(201,168,76,.3)}
+    .hero-cta-btn:hover{background:var(--gold-light);transform:translateY(-1px)}
+    .hero-cta-btn:active{transform:translateY(0)}
+    .section-header{padding:32px 24px 0;max-width:1400px;margin:0 auto}
+    .section-eyebrow{font-family:'DM Sans',sans-serif;font-size:.65rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:6px}
+    .section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(1.6rem,3vw,2.2rem);font-weight:500;color:var(--text)}
 
     /* ── NO RESULTS ── */
     .no-results{grid-column:1/-1;text-align:center;padding:80px 20px;color:var(--text-muted)}
@@ -311,7 +322,7 @@
       .search-input{width:140px}
       .search-input:focus{width:160px}
       /* Hero debajo del header unificado */
-      .hero{margin-top:96px}
+      .hero{margin-top:126px}
       .products-section{padding:16px 12px 120px}
       .products-grid{grid-template-columns:repeat(2,1fr);gap:12px}
     }
@@ -341,6 +352,15 @@
   <div class="filters-bar" id="filtersBar">
     <span class="filter-label">Colección</span>
   </div>
+  <div class="trust-bar">
+    <span>🚚 Envíos a toda Colombia</span>
+    <span class="trust-sep">·</span>
+    <span>⏱ Duración 8–12 horas</span>
+    <span class="trust-sep">·</span>
+    <span>💬 Pedido por WhatsApp</span>
+    <span class="trust-sep">·</span>
+    <span>✅ Fragancias 1.1 Premium</span>
+  </div>
 </header>
 
 <!-- HERO --><section class="hero">
@@ -360,6 +380,12 @@
       <div class="hero-badge"><span class="badge-dot"></span>Duración 8–12 horas</div>
       <div class="hero-badge"><span class="badge-dot"></span>Envíos Colombia</div>
     </div>
+    <div class="hero-cta">
+      <button class="hero-cta-btn" onclick="document.querySelector('.products-section').scrollIntoView({behavior:'smooth'})">
+        Explorar catálogo
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+    </div>
   </div>
 </section>
 
@@ -367,6 +393,13 @@
 <div class="results-bar">
   <span>Mostrando <span class="results-count" id="resultsCount">0</span> fragancias</span>
   <span id="resultsHint"></span>
+</div>
+
+<div class="section-header">
+  <div class="section-header-inner">
+    <span class="section-eyebrow">Catálogo</span>
+    <h2 class="section-title">Nuestra Colección</h2>
+  </div>
 </div>
 
 <!-- PRODUCTS -->
@@ -990,12 +1023,31 @@
               <span class="product-price-label">Precio</span>
               <div class="product-price">${fmt(p.price)}</div>
             </div>
-            <button class="view-btn">Ver →</button>
+            <button class="view-btn" data-id="${p.id}">Ver →</button>
           </div>
+          <button class="card-add-btn" data-id="${p.id}">+ Agregar al carrito</button>
         </div>`;
       card.style.animationDelay = `${Math.min(cardIdx * 40, 400)}ms`;
       cardIdx++;
-      card.addEventListener('click', () => openModal(p.id));
+      card.addEventListener('click', e => {
+        if (e.target.closest('.card-add-btn')) return;
+        openModal(p.id);
+      });
+      card.querySelector('.card-add-btn').addEventListener('click', e => {
+        e.stopPropagation();
+        addToCart(p.id, 1);
+        const btn = e.currentTarget;
+        btn.textContent = '✓ Agregado';
+        btn.style.background = 'var(--gold)';
+        btn.style.color = 'var(--dark)';
+        btn.style.borderColor = 'var(--gold)';
+        setTimeout(() => {
+          btn.textContent = '+ Agregar al carrito';
+          btn.style.background = '';
+          btn.style.color = '';
+          btn.style.borderColor = '';
+        }, 1500);
+      });
       grid.appendChild(card);
     });
 
