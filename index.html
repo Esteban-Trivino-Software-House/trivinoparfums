@@ -250,8 +250,12 @@
     .chat-fab-dismiss{position:absolute;top:-8px;right:-8px;width:20px;height:20px;border-radius:50%;background:var(--dark4);border:1px solid var(--border);color:var(--text-dim);font-size:.6rem;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:border-color .15s;z-index:1}
     .chat-fab-dismiss:hover{border-color:var(--gold);color:var(--text)}
     /* Botón ícono cuando está cerrado el bubble */
-    .chat-fab-btn{width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-light));display:flex;align-items:center;justify-content:center;font-size:1.3rem;box-shadow:0 4px 20px rgba(201,168,76,.4);transition:transform .2s,box-shadow .2s;flex-shrink:0;position:relative;cursor:pointer;border:none}
-    .chat-fab-btn:hover{transform:scale(1.08);box-shadow:0 6px 28px rgba(201,168,76,.5)}
+    .chat-fab-btn{background:var(--dark3);border:1px solid var(--border-light);border-radius:50px;padding:10px 18px 10px 14px;cursor:pointer;display:flex;align-items:center;gap:10px;box-shadow:0 4px 24px rgba(0,0,0,.5);transition:border-color .2s,transform .2s;position:relative}
+    .chat-fab-btn:hover{border-color:var(--gold);transform:translateY(-2px)}
+    .chat-fab-icon{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-light));display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0}
+    .chat-fab-text{font-size:.78rem;font-weight:500;color:var(--text);line-height:1.2}
+    .chat-fab-sub{font-size:.65rem;color:var(--text-muted);display:block}
+    .chat-fab-dot{position:absolute;top:6px;right:12px;width:9px;height:9px;border-radius:50%;background:#25d366;border:2px solid var(--dark3)}
     .chat-fab-pulse{position:absolute;inset:-4px;border-radius:50%;border:2px solid rgba(201,168,76,.4);animation:fabPulse 2s ease-out infinite}
     @keyframes fabPulse{0%{transform:scale(1);opacity:.6}100%{transform:scale(1.5);opacity:0}}
 
@@ -431,10 +435,11 @@
     <div class="chat-fab-msg" id="chatFabMsg">¿Para qué <strong>ocasión</strong> buscas una fragancia?</div>
     <div class="chat-fab-cta">Pregúntame →</div>
   </div>
-  <button class="chat-fab-btn" id="chatFabBtn">
-    <span class="chat-fab-pulse"></span>
-    🌹
-  </button>
+  <div class="chat-fab-btn" id="chatFabBtn">
+    <span class="chat-fab-dot"></span>
+    <span class="chat-fab-icon">✨</span>
+    <span class="chat-fab-text">Asistente<span class="chat-fab-sub">¿Qué buscas hoy?</span></span>
+  </div>
 </div>
 
 <div class="chat-panel" id="chatPanel" role="dialog" aria-label="Asistente Parfum">
@@ -956,7 +961,7 @@
   ];
 
   // ── STATE ──
-  let cart = [];
+  let cart = JSON.parse(localStorage.getItem('tp_cart') || '[]');
   let activeFilter = 'all';
   let searchTerm = '';
   let currentPage = 0;
@@ -1214,6 +1219,7 @@
   }
 
   function updateCartUI() {
+    localStorage.setItem('tp_cart', JSON.stringify(cart));
     const totalItems = cart.reduce((s, i) => s + i.qty, 0);
     const totalPrice = cart.reduce((s, i) => s + i.price * i.qty, 0);
     $('cartCount').textContent = totalItems;
@@ -1444,7 +1450,8 @@ ${catalogCtx}`;
     $('chatPanel').classList.add('open');
     $('chatFab').style.display = 'none';
     fabBubble.classList.remove('visible');
-    if (chatHistory.length === 0) {
+    // Solo añadir bienvenida si el panel está vacío
+    if ($('chatMessages').children.length === 0) {
       addChatMessage('bot', '¡Hola! Soy <strong>Parfum</strong>, tu asesor de fragancias 🌹<br><br>Cuéntame: ¿para qué ocasión buscas un perfume? ¿Tienes alguna fragancia favorita o una marca que te guste?');
     }
     setTimeout(() => $('chatInput').focus(), 350);
@@ -1488,14 +1495,17 @@ ${catalogCtx}`;
   }, 4000);
 
   // Cerrar bubble sin abrir chat
-  fabDismiss.addEventListener('click', e => {
+  $('chatFabDismiss').addEventListener('click', e => {
     e.stopPropagation();
     fabDismissed = true;
     fabBubble.classList.remove('visible');
   });
 
   $('chatFabBtn').addEventListener('click', openChatPanel);
-  $('chatFabBubble').addEventListener('click', openChatPanel);
+  // El bubble abre el chat solo si se hace click en él (no en el dismiss)
+  $('chatFabBubble').addEventListener('click', e => {
+    if (e.target.id !== 'chatFabDismiss') openChatPanel();
+  });
   $('chatClose').addEventListener('click', closeChatPanel);
 
   $('chatSend').addEventListener('click', () => {
