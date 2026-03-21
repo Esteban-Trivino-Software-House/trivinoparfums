@@ -1493,8 +1493,10 @@ ${catalogCtx}`;
   // Cerrar bubble sin abrir chat
   $('chatFabDismiss').addEventListener('click', e => {
     e.stopPropagation();
+    e.preventDefault();
     fabDismissed = true;
     fabBubble.classList.remove('visible');
+    fabBubble.style.display = 'none';
   });
 
   $('chatFabBtn').addEventListener('click', openChatPanel);
