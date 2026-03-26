@@ -1,0 +1,18 @@
+[build]
+  # Inyecta claves antes de publicar (nunca se guardan en el repo)
+  command = """
+    sed -i 's/__GEMINI_KEY__/'\"$GEMINI_API_KEY\"'/g' index.html && \
+    sed -i 's/__WOMPI_PUBLIC_KEY__/'\"$WOMPI_PUBLIC_KEY\"'/g' index.html
+  """
+  publish = "."
+  functions = "netlify/functions"
+
+[build.environment]
+  NODE_VERSION = "18"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
