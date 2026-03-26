@@ -1,8 +1,7 @@
-name: Sincronizar catálogo
+name: Sincronizar catálogo y desplegar
 
 on:
   schedule:
-    # Corre todos los días a las 3am (hora Colombia = UTC-5, así que 8am UTC)
     - cron: "0 8 * * *"
   push:
     branches: [feature/tienda-web]
@@ -13,6 +12,12 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
 
     steps:
       - name: Checkout repositorio
@@ -42,7 +47,21 @@ jobs:
             git pull --rebase origin feature/tienda-web
             git push
           )
-      # Netlify detecta el push y despliega automáticamente.
-      # La inyección de GEMINI_API_KEY y WOMPI_PUBLIC_KEY
-      # ocurre en el build command definido en netlify.toml.
+
+      - name: Inyectar claves (solo en el artifact, nunca en el repo)
+        run: |
+          sed -i "s|__GEMINI_KEY__|${{ secrets.GEMINI_API_KEY }}|g" index.html
+          sed -i "s|__WOMPI_PUBLIC_KEY__|${{ secrets.WOMPI_PUBLIC_KEY }}|g" index.html
+
+      - name: Configurar GitHub Pages
+        uses: actions/configure-pages@v4
+
+      - name: Subir sitio como artifact de Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
+      - name: Desplegar a GitHub Pages
+        id: deploy
+        uses: actions/deploy-pages@v4
 
