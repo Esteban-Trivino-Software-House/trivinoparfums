@@ -21,23 +21,21 @@ HTML_PATH = "index.html"
 QUERY = """
 {
   store(url: "%s") {
-    storeCatalogs {
-      collections {
+    collections {
+      id
+      name
+      slug
+      products {
         id
         name
-        slug
-        products {
-          id
-          name
-          sku
-          description
-          price
-          discountPrice
-          active
-          productImages {
-            pictureUrl
-            order
-          }
+        sku
+        description
+        price
+        discountPrice
+        active
+        productImages {
+          pictureUrl
+          order
         }
       }
     }
@@ -77,7 +75,7 @@ def clean_desc(html):
 
 
 def build_products(data):
-    collections = data["data"]["store"]["storeCatalogs"][0]["collections"]
+    collections = data["data"]["store"]["collections"]
 
     # Build sets of product IDs per collection slug
     by_slug = {}
