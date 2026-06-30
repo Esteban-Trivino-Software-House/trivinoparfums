@@ -18,13 +18,11 @@ OUTPUT_DIR  = "p"
 QUERY = """
 {
   store(url: "tokeperfumeria") {
-    storeCatalogs {
-      collections {
-        slug
-        products {
-          id name sku active price discountPrice
-          productImages { pictureUrl order }
-        }
+    collections {
+      slug
+      products {
+        id name sku active price discountPrice
+        productImages { pictureUrl order }
       }
     }
   }
@@ -40,7 +38,7 @@ def fetch():
                  "origin": ORIGIN, "referer": ORIGIN + "/"}
     )
     return json.loads(urllib.request.urlopen(req, timeout=60).read()
-                      )["data"]["store"]["storeCatalogs"][0]["collections"]
+                      )["data"]["store"]["collections"]
 
 
 def image_url(pic):
