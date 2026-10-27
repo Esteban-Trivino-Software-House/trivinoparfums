@@ -108,6 +108,8 @@
     .card-add-btn:hover{background:var(--gold);border-color:var(--gold);color:var(--on-gold);font-weight:700}
     .trust-bar{width:100%;background:var(--gold);color:#1a1814;display:flex;align-items:center;justify-content:center;gap:12px;padding:6px 16px;font-family:'DM Sans',sans-serif;font-size:.68rem;font-weight:600;letter-spacing:.04em;flex-wrap:wrap;text-align:center}
     .trust-sep{opacity:.4}
+    body.searching .hero,body.searching .section-header{display:none}
+    body.searching .products-section{margin-top:134px}
     .hero-cta{margin-top:28px}
     .hero-cta-btn{background:var(--gold);color:var(--on-gold);border:none;padding:14px 32px;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:.88rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:8px;letter-spacing:.04em;text-transform:uppercase;transition:background .2s,transform .15s;box-shadow:0 4px 24px rgba(201,168,76,.3)}
     .hero-cta-btn:hover{background:var(--gold-light);transform:translateY(-1px)}
@@ -343,6 +345,7 @@
       .search-input:focus{width:160px}
       /* Hero debajo del header unificado */
       .hero{margin-top:126px}
+      body.searching .products-section{margin-top:126px}
       .products-section{padding:16px 12px 120px}
       .products-grid{grid-template-columns:repeat(2,1fr);gap:12px}
     }
@@ -1480,6 +1483,7 @@
       activeFilter = key;
       searchTerm = '';
       $('searchInput').value = '';
+      document.body.classList.remove('searching');
       renderProducts();
     });
     filtersBar.appendChild(btn);
@@ -1489,7 +1493,12 @@
   let searchTimer;
   $('searchInput').addEventListener('input', e => {
     clearTimeout(searchTimer);
-    searchTimer = setTimeout(() => { searchTerm = e.target.value.toLowerCase().trim(); renderProducts(); }, 250);
+    searchTimer = setTimeout(() => {
+      searchTerm = e.target.value.toLowerCase().trim();
+      document.body.classList.toggle('searching', !!searchTerm);
+      renderProducts();
+      window.scrollTo({ top: 0 });
+    }, 250);
   });
 
   // ── GALLERY ARROWS ──
