@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Catálogo de Envases e Insumos – Trivino Parfums (Mayoristas)</title>
+<meta name="description" content="Catálogo mayorista de envases, difusores, válvulas e insumos para perfumería – Trivino Parfums."/>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌹</text></svg>"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gold:#b8902a;--gold-light:#d4a83c;--gold-dim:rgba(184,144,42,0.10);
+  --dark:#fafaf8;--dark2:#ffffff;--dark3:#f5f3ef;--dark4:#eeece8;
+  --text:#1a1814;--text-muted:#6b6560;--text-dim:#9b9590;
+  --border:#e0ddd8;--border-light:rgba(184,144,42,0.25);--card-bg:#ffffff;
+  --wa:#25d366;--on-gold:#1a1814;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--dark);color:var(--text);min-height:100vh;overflow-x:hidden}
+a{color:inherit}
+.topbar{position:sticky;top:0;z-index:50;background:rgba(250,250,248,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.logo{font-family:'DM Sans',sans-serif;font-size:1.05rem;font-weight:300;letter-spacing:.3em;text-decoration:none;color:var(--text);text-transform:uppercase}
+.logo span{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:400;font-size:.85rem;letter-spacing:.08em;color:var(--gold);margin-left:6px;text-transform:none}
+.back-link{font-size:.78rem;color:var(--text-muted);text-decoration:none;border:1px solid var(--border);padding:8px 16px;border-radius:50px;transition:.2s}
+.back-link:hover{border-color:var(--gold);color:var(--gold)}
+.hero{padding:70px 24px 40px;text-align:center;max-width:900px;margin:0 auto}
+.hero-label{font-size:.65rem;font-weight:400;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;display:block}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,6vw,3.6rem);font-weight:600;line-height:1.05;letter-spacing:-.01em;margin-bottom:18px}
+.hero-title em{color:var(--gold);font-style:italic;font-weight:500}
+.hero-desc{font-size:.95rem;font-weight:300;color:var(--text-muted);line-height:1.7;max-width:640px;margin:0 auto 26px}
+.hero-badges{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border);border-radius:50px;padding:9px 18px;font-size:.75rem;color:var(--text-muted);background:#fff}
+.notice{max-width:760px;margin:0 auto 10px;background:var(--gold-dim);border:1px solid var(--border-light);border-radius:12px;padding:14px 20px;font-size:.78rem;color:var(--text-muted);line-height:1.6}
+.notice b{color:var(--text)}
+
+.filters{position:sticky;top:64px;z-index:40;background:var(--dark);border-bottom:1px solid var(--border);padding:12px 24px;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+.filters::-webkit-scrollbar{display:none}
+.filter-btn{background:transparent;border:1px solid var(--border);border-radius:50px;color:var(--text-muted);padding:9px 16px;cursor:pointer;font-size:.75rem;font-weight:400;white-space:nowrap;transition:.2s;font-family:inherit}
+.filter-btn:hover{border-color:var(--gold);color:var(--gold)}
+.filter-btn.active{background:var(--gold);border-color:var(--gold);color:var(--on-gold);font-weight:600}
+
+.container{max-width:1280px;margin:0 auto;padding:20px 24px 80px}
+.cat-heading{display:flex;align-items:center;gap:12px;margin:52px 0 22px}
+.cat-heading .cat-icon{font-size:1.3rem}
+.cat-heading h2{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:600}
+.cat-count{font-size:.72rem;color:var(--text-dim);border-left:1px solid var(--border);padding-left:12px;margin-left:2px}
+
+.pcard-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:20px}
+.pcard{background:var(--card-bg);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:box-shadow .25s,transform .25s;display:flex;flex-direction:column}
+.pcard:hover{box-shadow:0 12px 30px rgba(0,0,0,.08);transform:translateY(-3px)}
+.pc-media{aspect-ratio:4/5;overflow:hidden;background:linear-gradient(160deg,#f3f1ec,#e9e5dc)}
+.pc-media img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
+.pcard:hover .pc-media img{transform:scale(1.05)}
+.icon-media{width:100%;height:100%;display:flex;align-items:center;justify-content:center}
+.icon-media span{font-size:3.2rem;opacity:.55}
+.pc-body{padding:16px 16px 18px;display:flex;flex-direction:column;gap:4px;flex:1}
+.pc-cat{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);opacity:.85}
+.pc-name{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;line-height:1.25}
+.pc-size{font-size:.74rem;color:var(--text-muted)}
+.pc-note{font-size:.7rem;color:var(--text-dim);line-height:1.4}
+.pc-price-row{margin-top:auto;padding-top:10px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.pc-price{font-size:.92rem;font-weight:600;color:var(--text)}
+.pc-price small{font-weight:400;color:var(--text-dim);font-size:.65rem}
+.price-sep{color:var(--text-dim);font-weight:400}
+.pc-wa{background:var(--wa);color:#fff;font-size:.68rem;font-weight:600;padding:7px 12px;border-radius:8px;text-decoration:none;white-space:nowrap}
+.pc-wa:hover{opacity:.88}
+
+.floating-wa{position:fixed;bottom:22px;right:22px;background:var(--wa);color:#fff;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;box-shadow:0 8px 24px rgba(37,211,102,.4);z-index:60;text-decoration:none}
+
+footer{border-top:1px solid var(--border);padding:36px 24px;text-align:center;font-size:.78rem;color:var(--text-dim)}
+footer a{color:var(--gold);text-decoration:none}
+
+@media(max-width:640px){
+  .topbar{padding:12px 16px}
+  .container{padding:16px 16px 60px}
+  .pcard-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+  .cat-heading{margin:36px 0 16px}
+}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <a href="../index.html" class="logo">TRIVINO <span>Parfums</span></a>
+  <a href="../index.html" class="back-link">← Volver al catálogo de fragancias</a>
+</div>
+
+<div class="hero">
+  <span class="hero-label">Mayoristas · Emprendedores</span>
+  <h1 class="hero-title">Envases <em>e Insumos</em></h1>
+  <p class="hero-desc">Envases, difusores, válvulas y accesorios genéricos para perfumería — ideales para emprendedores que arman y venden sus propias fragancias. Precios por mayor, con descuentos según cantidad.</p>
+  <div class="hero-badges">
+    <span class="hero-badge">📦 Precios por caja y por mayor</span>
+    <span class="hero-badge">🇨🇴 Pesos colombianos (IVA incluido)</span>
+    <span class="hero-badge">💬 Pedidos por WhatsApp</span>
+  </div>
+</div>
+
+<div class="filters"><button class="filter-btn active" data-filter="all">Todos</button><button class="filter-btn" data-filter="Mini Envases">🧴 Mini Envases</button><button class="filter-btn" data-filter="Envases 30 ML">💎 Envases 30 ML</button><button class="filter-btn" data-filter="Envases 50-60 ML">✨ Envases 50-60 ML</button><button class="filter-btn" data-filter="Envases 100-110 ML">🏺 Envases 100-110 ML</button><button class="filter-btn" data-filter="Ambientadores y Difusores">🕯️ Ambientadores y Difusores</button><button class="filter-btn" data-filter="Válvulas y Accesorios">🔧 Válvulas y Accesorios</button><button class="filter-btn" data-filter="Organización y Empaques">🎒 Organización y Empaques</button><button class="filter-btn" data-filter="Materias Primas">🧪 Materias Primas</button></div>
+
+<div class="container">
+
+    <section class="cat-section" id="cat-mini-envases">
+      <div class="cat-heading">
+        <span class="cat-icon">🧴</span>
+        <h2>Mini Envases</h2>
+        <span class="cat-count">4 referencias</span>
+      </div>
+      <div class="pcard-grid">
+        <div class="pcard" data-cat="Mini Envases">
+      <div class="pc-media"><img src="img/products/rollon-luxury-12-ml.jpg" alt="Rollon Luxury 12 ML" loading="lazy"></div>
+      <div class="pc-body">
+        <span class="pc-cat">Mini Envases</span>
+        <h3 class="pc-name">Rollon Luxury</h3>
+        <p class="pc-size">12 ML · Sin caja mínima</p>
+        <p class="pc-note">Negro · Dorado · Plata</p>
+        <div class="pc-price-row">
+          <span class="pc-price">$2.200 <span class="price-sep">–</span> $2.900<small>/u</small></span>
+          <a class="pc-wa" href="https://wa.me/573123042983?text=Hola%2C%20quiero%20cotizar%3A%20Rollon%20Luxury%2012%20ML%20%28Envases%20e%20Insumos%29" target="_blank" rel="noopener">Cotizar</a>
+        </div>
+      </div>
+    </div>
+<div class="pcard" data-cat="Mini Envases">
+      <div class="pc-media"><img src="img/products/decants-envase-vidrio-3-4-10-ml.jpg" alt="Decants Envase Vidrio 3 / 4 / 10 ML" loading="lazy"></div>
+      <div class="pc-body">
+        <span class="pc-cat">Mini Envases</span>
+        <h3 class="pc-name">Decants Envase Vidrio</h3>
+        <p class="pc-size">3 / 4 / 10 ML · Paquete x100 unidades</p>
+        <p class="pc-note">3ml, 4ml y 10ml</p>
+        <div class="pc-price-row">
+          <span class="pc-price">$750 <span class="price-sep">–</span> $2.250<small>/u</small></span>
+          <a class="pc-wa" href="https://wa.me/573123042983?text=Hola%2C%20quiero%20cotizar%3A%20Decants%20Envase%20Vidrio%203%20/%204%20/%2010%20ML%20%28Envases%20e%20Insumos%29" target="_blank" rel="noopener">Cotizar</a>
+        </div>
+      </div>
+    </div>
+<div class="pcard" data-cat="Mini Envases">
+      <div class="pc-media"><img src="img/products/envase-plastico-rollon-7-ml.jpg" alt="Envase Plástico Rollon 7 ML" loading="lazy"></div>
+      <div class="pc-body">
+        <span class="pc-cat">Mini Envases</span>
+        <h3 class="pc-name">Envase Plástico Rollon</h3>
+        <p class="pc-size">7 ML · Desde 100 unidades</p>
+        
+        <div class="pc-price-row">
+          <span class="pc-price">$750 <span class="price-sep">–</span> $850<small>/u</small></span>
+          <a class="pc-wa" href="https://wa.me/573123042983?text=Hola%2C%20quiero%20cotizar%3A%20Envase%20Pl%C3%A1stico%20Rollon%207%20ML%20%28Envases%20e%20Insumos%29" target="_blank" rel="noopener">Cotizar</a>
+        </div>
+      </div>
+    </div>
+<div class="pcard" data-cat="Mini Envases">
+      <div class="pc-media"><img src="img/products/envases-pensprayer-8-ml.jpg" alt="Envases Pensprayer 8 ML" loading="lazy"></div>
+      <div class="pc-body">
+        <span class="pc-cat">Mini Envases</span>
+        <h3 class="pc-name">Envases Pensprayer</h3>
+        <p class="pc-size">8 ML · Caja x1.600-1.800 und</p>
+        <p class="pc-note">Válvula o lapicero</p>
+        <div class="pc-price-row">
+          <span class="pc-price">$750 <span class="price-sep">–</span> $850<small>/u</small></span>
+          <a class="pc-wa" href="https://wa.me/573123042983?text=Hola%2C%20quiero%20cotizar%3A%20Envases%20Pensprayer%208%20ML%20%28Envases%20e%20Insumos%29" target="_blank" rel="noopener">Cotizar</a>
+        </div>
+      </div>
+    </div>
+      </div>
+    </section>
+    <section class="cat-section" id="cat-envases-30-ml">
+      <div class="cat-heading">
+        <span class="cat-icon">💎</span>
+        <h2>Envases 30 ML</h2>
+        <span class="cat-count">16 referencias</span>
+      </div>
+      <div class="pcard-grid">
+        <div class="pcard" data-cat="Envases 30 ML">
+      <div class="pc-media"><img src="img/products/emir-mix-30-ml.jpg" alt="Emir Mix 30 ML" loading="lazy"></div>
+      <div class="pc-body">
+        <span class="pc-cat">Envases 30 ML</span>
+        <h3 class="pc-name">Emir Mix</h3>
+        <p class="pc-size">30 ML · Caja surtida x168 und</p>
+        <p class="pc-note">Dorado · Plata</p>
+        <div class="pc-price-row">
+          <span class="pc-price">$2.450 <span class="price-sep">–</span> $2.900<small>/u</small></span>
+          <a class="pc-wa" href="https://wa.me/573123042983?text=Hola%2C%20quiero%20cotizar%3A%20Emir%20Mix%2030%20ML%20%28Envases%20e%20Insumos%29" target="_blank" rel="noopener">Cotizar</a>
+        </div>
+      </div>
+    </div>
+<div class="pcard" data-cat="Envases 30 ML">
+      <div class="pc-media"><img src="img/products/imperio-30-ml.jpg" alt="Imperio 30 ML" loading="lazy"></div>
+      <div class="pc-body">
+        <span class="pc-cat">Envases 30 ML</span>
+        <h3 class="pc-name">Imperio</h3>
+        <p class="pc-size">30 ML · Caja x144 und</p>
+        <p class="pc-note">Válvula de rosca</p>
+        <div class="pc-price-row">
+          <span class="pc-price">$2.950 <span class="price-sep">–</span> $3.350<small>/u</small></span>
+          <a class="pc-wa" href="https://wa.me/573123042983?text=Hola%2C%20quiero%20cotizar%3A%20Imperio%2030%20ML%20%28Envases%20e%20Insumos%29" target="_blank" rel="noopener">Cotizar</a>
+        </div>
+      </div>
+    </div>
+<div class="pcard" data-cat="Envases 30 ML">
+      <div class="pc-media"><img src="img/products/milano-30-ml.jpg" alt="Milano 30 ML" loading="lazy"></div>
+      <div class="pc-body">
+        <span class="pc-cat">Envases 30 ML</span>
+        <h3 class="pc-name">Milano</h3>
+        <p class="pc-size">30 ML · Caja x120 und</p>
+        <p class="pc-note">Válvula de rosca</p>
+        <div class="pc-price-row">
+          <span class="pc-price">$2.050 <span class="price-sep">–</span> $2.450<small>/u</small></span>
+          <a class="pc-wa" href="https://wa.me/573123042983?text=Hola%2C%20quiero%20cotizar%3A%20Milano%2030%20ML%20%28Envases%20e%20Insumos%29" target="_blank" rel="noopener">Cotizar</a>
+        </div>
+      </div>
+    </div>
+<div class="pcard" data-cat="Envases 30 ML">
+      <div class="pc-media"><img src="img/products/louis-30-ml.jpg" alt="Louis 30 ML" loading="lazy"></div>
+      <div class="pc-body">
+        <span class="pc-cat">Envases 30 ML</span>
+        <h3 class="pc-name">Louis</h3>
+        <p class="pc-size">30 ML · Caja x168 und</p>
+        <p class="pc-note">Válvula de rosca</p>
+        <div class="pc-price-row">
+          <span class="pc-price">$3.050 <span class="price-sep">–</span> $3.500<small>/u</small></span>
+          <a class="pc-wa" href="https://wa.me/573123042983?text=Hola%2C%20quiero%20cotizar%3A%20Louis%2030%20ML%20%28Envases%20e%20Insumos%29" target="_blank" rel="noopener">Cotizar</a>
+        </div>
+      </div>
+    </div>
+<div class="pcard" data-cat="Envases 30 ML">
+      <div class="pc-media"><img src="img/products/paris-30-ml.jpg" alt="París 30 ML" loading="lazy"></div>
+      <div class="pc-body">
+        <span class="pc-cat">Envases 30 ML</span>
+        <h3 class="pc-name">París</h3>
+        <p class="pc-size">30 ML · Caja x144 und</p>
+        <p class="pc-note">Válvula de rosca</p>
+        <div class="pc-price-row">
+          <span class="pc-price">$3.200 <span class="price-sep">–</span> $3.800<small>/u</small></span>
+          <a class="pc-wa" href="https://wa.me/573123042983?text=Hola%2C%20quiero%20cotizar%3A%20Par%C3%ADs%2030%20ML%20%28Envases%20e%20Insumos%29" target="_blank" rel="noopener">Cotizar</a>
+        </div>
+      </div>
+    </div>
+<div class="pcard" data-cat="Envases 30 ML">
+      <div class="pc-media"><img src="img/products/bala-mix-30-ml.jpg" alt="Bala Mix 30 ML" loading="lazy"></div>
+      <div class="pc-body">
+        <span class="pc-cat">Envases 30 ML</span>
+        <h3 class="pc-name">Bala Mix</h3>
+        <p class="pc-size">30 ML · Caja surtida x120 und</p>
+        
+        <div class="pc-price-row">
+          <span class="pc-price">$1.700 <span class="price-sep">–</span> $2.050<small>/u</small></span>
+          <a class="pc-wa" href="https://wa.me/573123042983?text=Hola%2C%20quiero%20cotizar%3A%20Bala%20Mix%2030%20ML%20%28Envases%20e%20Insumos%29" target="_blank" rel="noopener">Cotizar</a>
+        </div>
+      </div>
+    </div>
+<div class="pcard" data-cat="Envases 30 ML">
+      <div class="pc-media"><img src="img/products/cilindro-mix-30-ml.jpg" alt="Cilindro Mix 30 ML" loading="lazy"></div>
+      <div class="pc-body">
+        <span class="pc-cat">Envases 30 ML</span>
+        <h3 class="pc-name">Cilindro Mix</h3>
+        <p class="pc-size">30 ML · Caja surtida x120 und</p>
+        
+        <div class="pc-price-row">
+          <span class="pc-price">$1.700 <span class="price-sep">–</span> $1.850<small>/u</small></span>
+          <a class="pc-wa" href="https://wa.me/573123042983?text=Hola%2C%20quiero%20cotizar%3A%20Cilindro%20Mix%2030%20ML%20%28Envases%20e%20Insumos%29" target="_blank" rel="noopener">Cotizar</a>
+        </div>
+      </div>
+    </div>
+<div class="pcard" data-cat="Envases 30 ML">
+      <div class="pc-media"><img src="img/products/cartier-mix-30-ml.jpg" alt="Cartier Mix 30 ML" loading="lazy"></div>
+      <div class="pc-body">
+        <span class="pc-cat">Envases 30 ML</span>
+        <h3 class="pc-name">Cartier Mix</h3>
+        <p class="pc-size">30 ML · Caja surtida x120 und</p>
+        
+        <div class="pc-price-row">
+          <span class="pc-price">$1.700 <span class="price-sep">–</span> $1.850<small>/u</small></span>
+          <a class="pc-wa" href="https://wa.me/573123042983?text=Hola%2C%20quiero%20cotizar%3A%20Cartier%20Mix%2030%20ML%20%28Envases%20e%20Insumos%29" target="_blank" rel="noopener">Cotizar</a>
+        </div>
+      </div>
+    </div>
+<div class="pcard" data-cat="Envases 30 ML">
+      <div class="pc-media"><img src="img/products/corrugado-30-ml.jpg" alt="Corrugado 30 ML" loading="lazy"></div>
+      <div class="pc-body">
+        <span class="pc-cat">Envases 30 ML</span>
+        <h3 class="pc-name">Corrugado</h3>
+        <p class="pc-size">30 ML · Caja x180 und</p>
+        <p class="pc-note">Incluye válvula</p>
+        <div class="pc-price-row">
+          <span class="pc-price">$1.450 <span class="price-sep">–</span> $1.550<small>/u</small></span>
+          <a class="pc-wa" href="https://wa.me/573123042983?text=Hola%2C%20quiero%20cotizar%3A%20Corrugado%2030%20ML%20%28Envases%20e%20Insumos%29" target="_blank" rel="noopener">Cotizar</a>
+        </div>
+      </div>
+    </div>
+<div class="pcard" data-cat="Envases 30 ML">
+      <div class="pc-media"><img src="img/products/valen-mix-30-ml.jpg" alt="Valen Mix 30 ML" loading="lazy"></div>
+      <div class="pc-body">
+        <span class="pc-cat">Envases 30 ML</span>
+        <h3 class="pc-name">Valen Mix</h3>
+        <p class="pc-size">30 ML · Caja x144 und</p>
+        
+        <div class="pc-price-row">
+          <span class="pc-price">$2.400 <span class="price-sep">–</span> $2.600<small>/u</small></span>
+          <a class="pc-wa" href="https://wa.me/573123042983?text=Hola%2C%20quiero%20cotizar%3A%20Valen%20Mix%2030%20ML%20%28Envases%20e%20Insumos%29" target="_blank" rel="noopener">Cotizar</a>
+        </div>
+      </div>
+    </div>
+<div class="pcard" data-cat="Envases 30 ML">
+      <div class="pc-media"><img src="img/products/valen-brillante-mix-30-ml.jpg" alt="Valen Brillante Mix 30 ML" loading="lazy"></div>
+      <div class="pc-body">
+        <span class="pc-cat">Envases 30 ML</span>
+        <h3 class="pc-name">Valen Brillante Mix</h3>
+        <p class="pc-size">30 ML · Caja x144 und</p>
+        
+        <div class="pc-price-row">
+          <span class="pc-price">$2.800<small>/u</small></span>
+          <a class="pc-wa" href="https://wa.me/573123042983?text=Hola%2C%20quiero%20cotizar%3A%20Valen%20Brillante%20Mix%2030%20ML%20%28Envases%20e%20Insumos%29" target="_blank" rel="noopener">Cotizar</a>
+        </div>
+      </div>
+    </div>
+<div class="pcard" data-cat="Envases 30 ML">
+      <div class="pc-media"><img src="img/products/envase-perla-30-ml.jpg" alt="Envase Perla 30 ML" loading="lazy"></div>
+      <div class="pc-body">
+        <span class="pc-cat">Envases 30 ML</span>
+        <h3 class="pc-name">Envase Perla</h3>
+        <p class="pc-size">30 ML · Caja x144 und</p>
+        
+        <div class="pc-price-row">
+          <span class="pc-price">$3.400 <span class="price-sep">–</span> $3.750<small>/u</small></span>
+          <a class="pc-wa" href="https://wa.me/573123042983?text=Hola%2C%20quiero%20cotizar%3A%20Envase%20Perla%2030%20ML%20%28Envases%20e%20Insumos%29" target="_blank" rel="noopener">Cotizar</a>
+        </div>
+      </div>
+    </div>
+<div class="pcard" data-cat="Envases 30 ML">
+      <div class="pc-media"><img src="img/products/envase-xerjef-30-ml.jpg" alt="Envase Xerjef 30 ML" loading="lazy"></div>
+      <div class="pc-body">
+        <span class="pc-cat">Envases 30 ML</span>
+        <h3 class="pc-name">Envase Xerjef</h3>
+        <p class="pc-size">30 ML · Caja surtida x144 und</p>
+        
+        <div class="pc-price-row">
+          <span class="pc-price">$3.100 <span class="price-sep">–</span> $3.200<small>/u</small></span>
+          <a class="pc-wa" href="https://wa.me/573123042983?text=Hola%2C%20quiero%20cotizar%3A%20Envase%20Xerjef%2030%20ML%20%28Envases%20e%20Insumos%29" target="_blank" rel="noopener">Cotizar</a>
+        </div>
+      </div>
+    </div>
+<div class="pcard" data-cat="Envases 30 ML">
+      <div class="pc-media"><img src="img/products/envase-vale-elixir-30-ml.jpg" alt="Envase Vale Elixir 30 ML" loading="lazy"></div>
+      <div class="pc-body">
+        <span class="pc-cat">Envases 30 ML</span>
+        <h3 class="pc-name">Envase Vale Elixir</h3>
+        <p class="pc-size">30 ML · Caja surtida x168 und</p>
+        
+        <div class="pc-price-row">
+          <span class="pc-price">$2.750 <span class="price-sep">–</span> $2.900<small>/u</small></span>
+          <a class="pc-wa" href="https://wa.me/573123042983?text=Hola%2C%20quiero%20cotizar%3A%20Envase%20Vale%20Elixir%2030%20ML%20%28Envases%20e%20Insumos%29" target="_blank" rel="noopener">Cotizar</a>
+        </div>
+      </div>
+    </div>
+<div class="pcard" data-cat="Envases 30 ML">
+      <div class="pc-media"><img src="img/products/envase-king-30-ml.jpg" alt="Envase King 30 ML" loading="lazy"></div>
+      <div class="pc-body">
+        <span class="pc-cat">Envases 30 ML</span>
+        <h3 class="pc-name">Envase King</h3>
+        <p class="pc-size">30 ML · Caja surtida x120 und</p>
+        
+        <div class="pc-price-row">
+          <span class="pc-price">$3.300 <span class="price-sep">–</span> $3.400<small>/u</small></span>
+          <a class="pc-wa" href="https://wa.me/573123042983?text=Hola%2C%20quiero%20cotizar%3A%20Envase%20King%2030%20ML%20%28Envases%20e%20Insumos%29" target="_blank" rel="noopener">Cotizar</a>
+        </div>
+      </div>
+    </div>
+<div class="pcard" data-cat="Envases 30 ML">
+      <div class="pc-media"><img src="img/products/envase-trinity-30-ml.jpg" alt="Envase Trinity 30 ML" loading="lazy"></div>
+      <div class="pc-body">
+        <span class="pc-cat">Envases 30 ML</span>
+        <h3 class="pc-name">Envase Trinity</h3>
+        <p class="pc-size">30 ML · Caja surtida</p>
+        <p class="pc-note">Incluye válvula</p>
+        <div class="pc-price-row">
+          <span class="pc-price">$1.450 <span class="price-sep">–</span> $1.550<small>/u</small></span>
+          <a class="pc-wa" href="https://wa.me/573123042983?text=Hola%2C%20quiero%20cotizar%3A%20Envase%20Trinity%2030%20ML%20%28Envases%20e%20Insumos%29" target="_blank" rel="noopener">Cotizar</a>
+        </div>
+      </div>
+    </div>
+      </div>
+    </section>
+    <section class="cat-section" id="cat-envases-50-60-ml">
+      <div class="cat-heading">
+        <span class="cat-icon">✨</span>
+        <h2>Envases 50-60 ML</h2>
+        <span class="cat-count">14 referencias</span>
+      </div>
+      <div class="pcard-grid">
+        <div class="pcard" data-cat="Envases 50-60 ML">
+      <div class="pc-media"><img src="img/products/envase-imperio-60-ml.jpg" alt="Envase Imperio 60 ML" loading="lazy"></div>
+      <div class="pc-body">
+        <span class="pc-cat">Envases 50-60 ML</span>
+        <h3 class="pc-name">Envase Imperio</h3>
+        <p class="pc-size">60 ML · Caja x70 und</p>
+        <p class="pc-note">Válvula de rosca</p>
+        <div class="pc-price-row">
+          <span class="pc-price">$3.350 <span class="price-sep">–</span> $3.500<small>/u</small></span>
+          <a class="pc-wa" href="https://wa.me/573123042983?text=Hola%2C%20quiero%20cotizar%3A%20Envase%20Imperio%2060%20ML%20%28Envases%20e%20Insumos%29" target="_blank" rel="noopener">Cotizar</a>
+        </div>
+      </div>
+    </div>
+<div class="pcard" data-cat="Envases 50-60 ML">
+      <div class="pc-media"><img src="img/products/envase-noir-50-ml.jpg" alt="Envase Noir 50 ML" loading="lazy"></div>
+      <div class="pc-body">
+        <span class="pc-cat">Envases 50-60 ML</span>
+        <h3 class="pc-name">Envase Noir</h3>
+        <p class="pc-size">50 ML · Caja surtida x160 und</p>
+        <p class="pc-note">Válvula de rosca</p>
+        <div class="pc-price-row">
+          <span class="pc-price">$3.350 <span class="price-sep">–</span> $3.500<small>/u</small></span>
+          <a class="pc-wa" href="https://wa.me/573123042983?text=Hola%2C%20quiero%20cotizar%3A%20Envase%20Noir%2050%20ML%20%28Envases%20e%20Insumos%29" target="_blank" rel="noopener">Cotizar</a>
+        </div>
+      </div>
+    </div>
+<div class="pcard" data-cat="Envases 50-60 ML">
+      <div class="pc-media"><img src="img/products/envase-odisea-50-ml.jpg" alt="Envase Odisea 50 ML" loading="lazy"></div>
+      <div class="pc-body">
+        <span class="pc-cat">Envases 50-60 ML</span>
+        <h3 class="pc-name">Envase Odisea</h3>
+        <p class="pc-size">50 ML · Caja surtida x96 und</p>
+        
+        <div class="pc-price-row">
+          <span class="pc-price">$6.550 <span class="price-sep">–</span> $6.650<small>/u</small></span>
+          <a class="pc-wa" href="https://wa.me/573123042983?text=Hola%2C%20quiero%20cotizar%3A%20Envase%20Odisea%2050%20ML%20%28Envases%20e%20Insumos%29" target="_blank" rel="noopener">Cotizar</a>
+        </div>
+      </div>
+    </div>
+<div class="pcard" data-cat="Envases 50-60 ML">
+      <div class="pc-media"><img src="img/products/envase-paris-50-ml.jpg" alt="Envase París 50 ML" loading="lazy"></div>
+      <div class="pc-body">
+        <span class="pc-cat">Envases 50-60 ML</span>
+        <h3 class="pc-name">Envase París</h3>
+        <p class="pc-size">50 ML · Caja x120 und</p>
+        <p class="pc-note">Válvula de rosca</p>
+        <div class="pc-price-row">
+          <span class="pc-price">$3.700 <span class="price-sep">–</span> $3.850<small>/u</small></span>
+          <a class="pc-wa" href="https://wa.me/573123042983?text=Hola%2C%20quiero%20cotizar%3A%20Envase%20Par%C3%ADs%2050%20ML%20%28Envases%20e%20Insumos%29" target="_blank" rel="noopener">Cotizar</a>
+        </div>
+      </div>
+    </div>
+<div class="pcard" data-cat="Envases 50-60 ML">
+      <div class="pc-media"><img src="img/products/envase-xerjef-50-ml.jpg" alt="Envase Xerjef 50 ML" loading="lazy"></div>
+      <div class="pc-body">
+        <span class="pc-cat">Envases 50-60 ML</span>
+        <h3 class="pc-name">Envase Xerjef</h3>
+        <p class="pc-size">50 ML · Caja surtida x120 und</p>
+        
+        <div class="pc-price-row">
+          <span class="pc-price">$4.250 <span class="price-sep">–</span> $4.300<small>/u</small></span>
+          <a class="pc-wa" href="https://wa.me/573123042983?text=Hola%2C%20quiero%20cotizar%3A%20Envase%20Xerjef%2050%20ML%20%28Envases%20e%20Insumos%29" target="_blank" rel="noopener">Cotizar</a>
+        </div>
+      </div>
+    </div>
+<div class="pcard" data-cat="Envases 50-60 ML">
+      <div class="pc-media"><img src="img/products/envase-tom-50-ml.jpg" alt="Envase Tom 50 ML" loading="lazy"></div>
+      <div class="pc-body">
+        <span class="pc-cat">Envases 50-60 ML</span>
+        <h3 class="pc-name">Envase Tom</h3>
+        <p class="pc-size">50 ML · Caja surtida x96 und</p>
+        
+        <div class="pc-price-row">
+          <span class="pc-price">$5.050 <span class="price-sep">–</span> $5.200<small>/u</small></span>
+          <a class="pc-wa" href="https://wa.me/573123042983?text=Hola%2C%20quiero%20cotizar%3A%20Envase%20Tom%2050%20ML%20%28Envases%20e%20Insumos%29" target="_blank" rel="noopener">Cotizar</a>
+        </div>
+      </div>
+    </div>
+<div class="pcard" data-cat="Envases 50-60 ML">
+      <div class="pc-media"><img src="img/products/valen-clear-50-ml.jpg" alt="Valen Clear 50 ML" loading="lazy"></div>
+      <div class="pc-body">
+        <span class="pc-cat">Envases 50-60 ML</span>
+        <h3 class="pc-name">Valen Clear</h3>
+        <p class="pc-size">50 ML · Caja surtida x120 und</p>
+        
+        <div class="pc-price-row">
+          <span class="pc-price">$3.050 <span class="price-sep">–</span> $3.150<small>/u</small></span>
+          <a class="pc-wa" href="https://wa.me/573123042983?text=Hola%2C%20quiero%20cotizar%3A%20Valen%20Clear%2050%20ML%20%28Envases%20e%20Insumos%29" target="_blank" rel="noopener">Cotizar</a>
+        </div>
+      </div>
+    </div>
+<div class="pcard" data-cat="Envases 50-60 ML">
+      <div class="pc-media"><img src="img/products/valen-brillante-50-ml.jpg" alt="Valen Brillante 50 ML" loading="lazy"></div>
+      <div class="pc-body">
+        <span class="pc-cat">Envases 50-60 ML</span>
+        <h3 class="pc-name">Valen Brillante</h3>
+        <p class="pc-size">50 ML · Caja surtida x90 und</p>
+        
+        <div class="pc-price-row">
+          <span class="pc-price">$3.750 <span class="price-sep">–</span> $3.900<small>/u</small></span>
+          <a class="pc-wa" href="https://wa.me/573123042983?text=Hola%2C%20quiero%20cotizar%3A%20Valen%20Brillante%2050%20ML%20%28Envases%20e%20Insumos%29" target="_blank" rel="noopener">Cotizar</a>
+        </div>
+      </div>
+    </div>
+<div class="pcard" data-cat="Envases 50-60 ML">
+      <div class="pc-media"><img src="img/products/bala-mix-50-ml.jpg" alt="Bala Mix 50 ML" loading="lazy"></div>
+      <div class="pc-body">
+        <span class="pc-cat">Envases 50-60 ML</span>
+        <h3 class="pc-name">Bala Mix</h3>
+        <p class="pc-size">50 ML · Caja surtida x120 und</p>
+        
+        <div class="pc-price-row">
+          <span class="pc-price">$2.750 <span class="price-sep">–</span> $2.900<small>/u</small></span>
+          <a class="pc-wa" href="https://wa.me/573123042983?text=Hola%2C%20quiero%20cotizar%3A%20Bala%20Mix%2050%20ML%20%28Envases%20e%20Insumos%29" target="_blank" rel="noopener">Cotizar</a>
+        </div>
+      </div>
+    </div>
+<div class="pcard" data-cat="Envases 50-60 ML">
+      <div class="pc-media"><img src="img/products/cartier-50-ml.jpg" alt="Cartier 50 ML" loading="lazy"></div>
+      <div class="pc-body">
+        <span class="pc-cat">Envases 50-60 ML</span>
+        <h3 class="pc-name">Cartier</h3>
+        <p class="pc-size">50 ML · Caja surtida x120 und</p>
+        
+        <div class="pc-price-row">
+          <span class="pc-price">$2.750 <span class="price-sep">–</span> $2.900<small>/u</small></span>
+          <a class="pc-wa" href="https://wa.me/573123042983?text=Hola%2C%20quiero%20cotizar%3A%20Cartier%2050%20ML%20%28Envases%20e%20Insumos%29" target="_blank" rel="noopener">Cotizar</a>
+        </div>
+      </div>
+    </div>
+<div class="pcard" data-cat="Envases 50-60 ML">
+      <div class="pc-media"><img src="img/products/envase-dubai-60-ml.jpg" alt="Envase Dubai 60 ML" loading="lazy"></div>
+      <div class="pc-body">
+        <span class="pc-cat">Envases 50-60 ML</span>
+        <h3 class="pc-name">Envase Dubai</h3>
+        <p class="pc-size">60 ML · Caja surtida x120 und</p>
+        
+        <div class="pc-price-row">
+          <span class="pc-price">$2.950 <span class="price-sep">–</span> $3.000<small>/u</small></span>
+          <a class="pc-wa" href="https://wa.me/573123042983?text=Hola%2C%20quiero%20cotizar%3A%20Envase%20Dubai%2060%20ML%20%28Envases%20e%20Insumos%29" target="_blank" rel="noopener">Cotizar</a>
+        </div>
+      </div>
+    </div>
+<div class="pcard" data-cat="Envases 50-60 ML">
+      <div class="pc-media"><img src="img/products/bala-mix-60-ml.jpg" alt="Bala Mix 60 ML" loading="lazy"></div>
+      <div class="pc-body">
+        <span class="pc-cat">Envases 50-60 ML</span>
+        <h3 class="pc-name">Bala Mix</h3>
+        <p class="pc-size">60 ML · Caja surtida</p>
+        
+        <div class="pc-price-row">
+          <span class="pc-price">$2.900 <span class="price-sep">–</span> $3.000<small>/u</small></span>
+          <a class="pc-wa" href="https://wa.me/573123042983?text=Hola%2C%20quiero%20cotizar%3A%20Bala%20Mix%2060%20ML%20%28Envases%20e%20Insumos%29" target="_blank" rel="noopener">Cotizar</a>
+        </div>
+      </div>
+    </div>
+<div class="pcard" data-cat="Envases 50-60 ML">
+      <div class="pc-media"><img src="img/products/cartier-60-ml.jpg" alt="Cartier 60 ML" loading="lazy"></div>
+      <div class="pc-body">
+        <span class="pc-cat">Envases 50-60 ML</span>
+        <h3 class="pc-name">Cartier</h3>
+        <p class="pc-size">60 ML · Caja surtida x120 und</p>
+        
+        <div class="pc-price-row">
+          <span class="pc-price">$2.900 <span class="price-sep">–</span> $3.000<small>/u</small></span>
+          <a class="pc-wa" href="https://wa.me/573123042983?text=Hola%2C%20quiero%20cotizar%3A%20Cartier%2060%20ML%20%28Envases%20e%20Insumos%29" target="_blank" rel="noopener">Cotizar</a>
+        </div>
+      </div>
+    </div>
+<div class="pcard" data-cat="Envases 50-60 ML">
+      <div class="pc-media"><img src="img/products/corrugado-60-ml.jpg" alt="Corrugado 60 ML" loading="lazy"></div>
+      <div class="pc-body">
+        <span class="pc-cat">Envases 50-60 ML</span>
+        <h3 class="pc-name">Corrugado</h3>
+        <p class="pc-size">60 ML · Caja x180 und</p>
+        <p class="pc-note">Incluye válvula</p>
+        <div class="pc-price-row">
+          <span class="pc-price">$1.900 <span class="price-sep">–</span> $2.000<small>/u</small></span>
+          <a class="pc-wa" href="https://wa.me/573123042983?text=Hola%2C%20quiero%20cotizar%3A%20Corrugado%2060%20ML%20%28Envases%20e%20Insumos%29" target="_blank" rel="noopener">Cotizar</a>
+        </div>
+      </div>
+    </div>
+      </div>
+    </section>
+    <section class="cat-section" id="cat-envases-100-110-ml">
+      <div class="cat-heading">
+        <span class="cat-icon">🏺</span>
+        <h2>Envases 100-110 ML</h2>
+        <span class="cat-count">8 referencias</span>
+      </div>
+      <div class="pcard-grid">
+        <div class="pcard" data-cat="Envases 100-110 ML">
+      <div class="pc-media"><img src="img/products/envase-noir-100-ml.jpg" alt="Envase Noir 100 ML" loading="lazy"></div>
+      <div class="pc-body">
+        <span class="pc-cat">Envases 100-110 ML</span>
+        <h3 class="pc-name">Envase Noir</h3>
+        <p class="pc-size">100 ML · Caja x100 und</p>
+        <p class="pc-note">Válvula de rosca</p>
+        <div class="pc-price-row">
+          <span class="pc-price">$5.100 <span class="price-sep">–</span> $5.400<small>/u</small></span>
+          <a class="pc-wa" href="https://wa.me/573123042983?text=Hola%2C%20quiero%20cotizar%3A%20Envase%20Noir%20100%20ML%20%28Envases%20e%20Insumos%29" target="_blank" rel="noopener">Cotizar</a>
+        </div>
+      </div>
+    </div>
+<div class="pcard" data-cat="Envases 100-110 ML">
+      <div class="pc-media"><img src="img/products/envase-sultan-100-ml.jpg" alt="Envase Sultán 100 ML" loading="lazy"></div>
+      <div class="pc-body">
+        <span class="pc-cat">Envases 100-110 ML</span>
+        <h3 class="pc-name">Envase Sultán</h3>
+        <p class="pc-size">100 ML · Caja por color x48 und</p>
+        <p class="pc-note">Válvula de rosca · Tapa dorada/negra</p>
+        <div class="pc-price-row">
+          <span class="pc-price">$5.000 <span class="price-sep">–</span> $5.200<small>/u</small></span>
+          <a class="pc-wa" href="https://wa.me/573123042983?text=Hola%2C%20quiero%20cotizar%3A%20Envase%20Sult%C3%A1n%20100%20ML%20%28Envases%20e%20Insumos%29" target="_blank" rel="noopener">Cotizar</a>
+        </div>
+      </div>
+    </div>
+<div class="pcard" data-cat="Envases 100-110 ML">
+      <div class="pc-media"><img src="img/products/envase-bleu-noir-100-ml.jpg" alt="Envase Bleu Noir 100 ML" loading="lazy"></div>
+      <div class="pc-body">
+        <span class="pc-cat">Envases 100-110 ML</span>
+        <h3 class="pc-name">Envase Bleu Noir</h3>
+        <p class="pc-size">100 ML · Caja x60 und</p>
+        <p class="pc-note">Válvula de rosca</p>
+        <div class="pc-price-row">
+          <span class="pc-price">$4.750 <span class="price-sep">–</span> $4.950<small>/u</small></span>
+          <a class="pc-wa" href="https://wa.me/573123042983?text=Hola%2C%20quiero%20cotizar%3A%20Envase%20Bleu%20Noir%20100%20ML%20%28Envases%20e%20Insumos%29" target="_blank" rel="noopener">Cotizar</a>
+        </div>
+      </div>
+    </div>
+<div class="pcard" data-cat="Envases 100-110 ML">
+      <div class="pc-media"><img src="img/products/envase-paris-100-ml.jpg" alt="Envase París 100 ML" loading="lazy"></div>
+      <div class="pc-body">
+        <span class="pc-cat">Envases 100-110 ML</span>
+        <h3 class="pc-name">Envase París</h3>
+        <p class="pc-size">100 ML · Caja x48 und</p>
+        <p class="pc-note">Válvula de rosca</p>
+        <div class="pc-price-row">
+          <span class="pc-price">$4.850 <span class="price-sep">–</span> $5.000<small>/u</small></span>
+          <a class="pc-wa" href="https://wa.me/573123042983?text=Hola%2C%20quiero%20cotizar%3A%20Envase%20Par%C3%ADs%20100%20ML%20%28Envases%20e%20Insumos%29" target="_blank" rel="noopener">Cotizar</a>
+        </div>
+      </div>
+    </div>
+<div class="pcard" data-cat="Envases 100-110 ML">
+      <div class="pc-media"><img src="img/products/envase-odisea-110-ml.jpg" alt="Envase Odisea 110 ML" loading="lazy"></div>
+      <div class="pc-body">
+        <span class="pc-cat">Envases 100-110 ML</span>
+        <h3 class="pc-name">Envase Odisea</h3>
+        <p class="pc-size">110 ML · Caja x48 und</p>
+        <p class="pc-note">Rosado · Negro dorado</p>
+        <div class="pc-price-row">
+          <span class="pc-price">$7.450 <span class="price-sep">–</span> $7.750<small>/u</small></span>
+          <a class="pc-wa" href="https://wa.me/573123042983?text=Hola%2C%20quiero%20cotizar%3A%20Envase%20Odisea%20110%20ML%20%28Envases%20e%20Insumos%29" target="_blank" rel="noopener">Cotizar</a>
+        </div>
+      </div>
+    </div>
+<div class="pcard" data-cat="Envases 100-110 ML">
+      <div class="pc-media"><img src="img/products/cilindro-color-100-ml.jpg" alt="Cilindro Color 100 ML" loading="lazy"></div>
+      <div class="pc-body">
+        <span class="pc-cat">Envases 100-110 ML</span>
+        <h3 class="pc-name">Cilindro Color</h3>
+        <p class="pc-size">100 ML · Caja surtida x120 und</p>
+        
+        <div class="pc-price-row">
+          <span class="pc-price">$3.300 <span class="price-sep">–</span> $3.450<small>/u</small></span>
+          <a class="pc-wa" href="https://wa.me/573123042983?text=Hola%2C%20quiero%20cotizar%3A%20Cilindro%20Color%20100%20ML%20%28Envases%20e%20Insumos%29" target="_blank" rel="noopener">Cotizar</a>
+        </div>
+      </div>
+    </div>
+<div class="pcard" data-cat="Envases 100-110 ML">
+      <div class="pc-media"><img src="img/products/envase-shantal-110-ml.jpg" alt="Envase Shantal 110 ML" loading="lazy"></div>
+      <div class="pc-body">
+        <span class="pc-cat">Envases 100-110 ML</span>
+        <h3 class="pc-name">Envase Shantal</h3>
+        <p class="pc-size">110 ML · Caja x96 und</p>
+        <p class="pc-note">Válvula de rosca</p>
+        <div class="pc-price-row">
+          <span class="pc-price">$3.450 <span class="price-sep">–</span> $3.600<small>/u</small></span>
+          <a class="pc-wa" href="https://wa.me/573123042983?text=Hola%2C%20quiero%20cotizar%3A%20Envase%20Shantal%20110%20ML%20%28Envases%20e%20Insumos%29" target="_blank" rel="noopener">Cotizar</a>
+        </div>
+      </div>
+    </div>
+<div class="pcard" data-cat="Envases 100-110 ML">
+      <div class="pc-media"><img src="img/products/envase-polo-100-ml.jpg" alt="Envase Polo 100 ML" loading="lazy"></div>
+      <div class="pc-body">
+        <span class="pc-cat">Envases 100-110 ML</span>
+        <h3 class="pc-name">Envase Polo</h3>
+        <p class="pc-size">100 ML · Caja surtida x96 und</p>
+        
+        <div class="pc-price-row">
+          <span class="pc-price">$4.000 <span class="price-sep">–</span> $4.250<small>/u</small></span>
+          <a class="pc-wa" href="https://wa.me/573123042983?text=Hola%2C%20quiero%20cotizar%3A%20Envase%20Polo%20100%20ML%20%28Envases%20e%20Insumos%29" target="_blank" rel="noopener">Cotizar</a>
+        </div>
+      </div>
+    </div>
+      </div>
+    </section>
+    <section class="cat-section" id="cat-ambientadores-y-difusores">
+      <div class="cat-heading">
+        <span class="cat-icon">🕯️</span>
+        <h2>Ambientadores y Difusores</h2>
+        <span class="cat-count">5 referencias</span>
+      </div>
+      <div class="pcard-grid">
+        <div class="pcard" data-cat="Ambientadores y Difusores">
+      <div class="pc-media"><img src="img/products/reed-black-home-50-ml.jpg" alt="Reed Black Home 50 ML" loading="lazy"></div>
+      <div class="pc-body">
+        <span class="pc-cat">Ambientadores y Difusores</span>
+        <h3 class="pc-name">Reed Black Home</h3>
+        <p class="pc-size">50 ML · Caja x18 und</p>
+        <p class="pc-note">Difusor de varitas</p>
+        <div class="pc-price-row">
+          <span class="pc-price">$3.300 <span class="price-sep">–</span> $3.450<small>/u</small></span>
+          <a class="pc-wa" href="https://wa.me/573123042983?text=Hola%2C%20quiero%20cotizar%3A%20Reed%20Black%20Home%2050%20ML%20%28Envases%20e%20Insumos%29" target="_blank" rel="noopener">Cotizar</a>
+        </div>
+      </div>
+    </div>
+<div class="pcard" data-cat="Ambientadores y Difusores">
+      <div class="pc-media"><img src="img/products/reed-black-hexagonal-50-ml.jpg" alt="Reed Black Hexagonal 50 ML" loading="lazy"></div>
+      <div class="pc-body">
+        <span class="pc-cat">Ambientadores y Difusores</span>
+        <h3 class="pc-name">Reed Black Hexagonal</h3>
+        <p class="pc-size">50 ML · Caja x18 und</p>
+        <p class="pc-note">Difusor de varitas</p>
+        <div class="pc-price-row">
+          <span class="pc-price">$3.300 <span class="price-sep">–</span> $3.450<small>/u</small></span>
+          <a class="pc-wa" href="https://wa.me/573123042983?text=Hola%2C%20quiero%20cotizar%3A%20Reed%20Black%20Hexagonal%2050%20ML%20%28Envases%20e%20Insumos%29" target="_blank" rel="noopener">Cotizar</a>
+        </div>
+      </div>
+    </div>
+<div class="pcard" data-cat="Ambientadores y Difusores">
+      <div class="pc-media"><img src="img/products/royal-secret-spray-250-ml.jpg" alt="Royal Secret Spray 250 ML" loading="lazy"></div>
+      <div class="pc-body">
+        <span class="pc-cat">Ambientadores y Difusores</span>
+        <h3 class="pc-name">Royal Secret Spray</h3>
+        <p class="pc-size">250 ML · Caja por color x120 und</p>
+        <p class="pc-note">Ámbar · Negro · Transparente. Incluye válvula a elección</p>
+        <div class="pc-price-row">
+          <span class="pc-price">$2.300 <span class="price-sep">–</span> $3.450<small>/u</small></span>
+          <a class="pc-wa" href="https://wa.me/573123042983?text=Hola%2C%20quiero%20cotizar%3A%20Royal%20Secret%20Spray%20250%20ML%20%28Envases%20e%20Insumos%29" target="_blank" rel="noopener">Cotizar</a>
+        </div>
+      </div>
+    </div>
+<div class="pcard" data-cat="Ambientadores y Difusores">
+      <div class="pc-media"><img src="img/products/reed-silver-home-100-ml.jpg" alt="Reed Silver Home 100 ML" loading="lazy"></div>
+      <div class="pc-body">
+        <span class="pc-cat">Ambientadores y Difusores</span>
+        <h3 class="pc-name">Reed Silver Home</h3>
+        <p class="pc-size">100 ML · Caja x36 und</p>
+        <p class="pc-note">Difusor de varitas</p>
+        <div class="pc-price-row">
+          <span class="pc-price">$4.200 <span class="price-sep">–</span> $4.350<small>/u</small></span>
+          <a class="pc-wa" href="https://wa.me/573123042983?text=Hola%2C%20quiero%20cotizar%3A%20Reed%20Silver%20Home%20100%20ML%20%28Envases%20e%20Insumos%29" target="_blank" rel="noopener">Cotizar</a>
+        </div>
+      </div>
+    </div>
+<div class="pcard" data-cat="Ambientadores y Difusores">
+      <div class="pc-media"><img src="img/products/royal-secret-boticario-250-ml.jpg" alt="Royal Secret Boticario 250 ML" loading="lazy"></div>
+      <div class="pc-body">
+        <span class="pc-cat">Ambientadores y Difusores</span>
+        <h3 class="pc-name">Royal Secret Boticario</h3>
+        <p class="pc-size">250 ML · Caja x120 und</p>
+        <p class="pc-note">Con o sin válvula</p>
+        <div class="pc-price-row">
+          <span class="pc-price">$1.300 <span class="price-sep">–</span> $3.300<small>/u</small></span>
+          <a class="pc-wa" href="https://wa.me/573123042983?text=Hola%2C%20quiero%20cotizar%3A%20Royal%20Secret%20Boticario%20250%20ML%20%28Envases%20e%20Insumos%29" target="_blank" rel="noopener">Cotizar</a>
+        </div>
+      </div>
+    </div>
+      </div>
+    </section>
+    <section class="cat-section" id="cat-válvulas-y-accesorios">
+      <div class="cat-heading">
+        <span class="cat-icon">🔧</span>
+        <h2>Válvulas y Accesorios</h2>
+        <span class="cat-count">6 referencias</span>
+      </div>
+      <div class="pcard-grid">
+        <div class="pcard" data-cat="Válvulas y Accesorios">
+      <div class="pc-media"><img src="img/products/valvula-boticario-lujo-24-28-estandar.jpg" alt="Válvula Boticario Lujo #24 / #28 Estándar" loading="lazy"></div>
+      <div class="pc-body">
+        <span class="pc-cat">Válvulas y Accesorios</span>
+        <h3 class="pc-name">Válvula Boticario Lujo #24 / #28</h3>
+        <p class="pc-size">Estándar · Caja x1.000 und</p>
+        
+        <div class="pc-price-row">
+          <span class="pc-price">$950 <span class="price-sep">–</span> $1.150<small>/u</small></span>
+          <a class="pc-wa" href="https://wa.me/573123042983?text=Hola%2C%20quiero%20cotizar%3A%20V%C3%A1lvula%20Boticario%20Lujo%20%2324%20/%20%2328%20Est%C3%A1ndar%20%28Envases%20e%20Insumos%29" target="_blank" rel="noopener">Cotizar</a>
+        </div>
+      </div>
+    </div>
+<div class="pcard" data-cat="Válvulas y Accesorios">
+      <div class="pc-media"><img src="img/products/valvula-gatillo-lujo-24-estandar.jpg" alt="Válvula Gatillo Lujo #24 Estándar" loading="lazy"></div>
+      <div class="pc-body">
+        <span class="pc-cat">Válvulas y Accesorios</span>
+        <h3 class="pc-name">Válvula Gatillo Lujo #24</h3>
+        <p class="pc-size">Estándar · Und / Caja x100</p>
+        
+        <div class="pc-price-row">
+          <span class="pc-price">$1.150 <span class="price-sep">–</span> $1.700<small>/u</small></span>
+          <a class="pc-wa" href="https://wa.me/573123042983?text=Hola%2C%20quiero%20cotizar%3A%20V%C3%A1lvula%20Gatillo%20Lujo%20%2324%20Est%C3%A1ndar%20%28Envases%20e%20Insumos%29" target="_blank" rel="noopener">Cotizar</a>
+        </div>
+      </div>
+    </div>
+<div class="pcard" data-cat="Válvulas y Accesorios">
+      <div class="pc-media"><img src="img/products/valvulas-atomizadoras-18-410-premium.jpg" alt="Válvulas Atomizadoras #18-410 Premium" loading="lazy"></div>
+      <div class="pc-body">
+        <span class="pc-cat">Válvulas y Accesorios</span>
+        <h3 class="pc-name">Válvulas Atomizadoras #18-410</h3>
+        <p class="pc-size">Premium · Caja x100 und</p>
+        <p class="pc-note">Surtidas o por color</p>
+        <div class="pc-price-row">
+          <span class="pc-price">$350 <span class="price-sep">–</span> $400<small>/u</small></span>
+          <a class="pc-wa" href="https://wa.me/573123042983?text=Hola%2C%20quiero%20cotizar%3A%20V%C3%A1lvulas%20Atomizadoras%20%2318-410%20Premium%20%28Envases%20e%20Insumos%29" target="_blank" rel="noopener">Cotizar</a>
+        </div>
+      </div>
+    </div>
+<div class="pcard" data-cat="Válvulas y Accesorios">
+      <div class="pc-media"><img src="img/products/dosificador-1000-ml.jpg" alt="Dosificador 1000 ML" loading="lazy"></div>
+      <div class="pc-body">
+        <span class="pc-cat">Válvulas y Accesorios</span>
+        <h3 class="pc-name">Dosificador</h3>
+        <p class="pc-size">1000 ML · Por unidad</p>
+        <p class="pc-note">Pico flexible · dosificación controlada</p>
+        <div class="pc-price-row">
+          <span class="pc-price">$11.500<small>/u</small></span>
+          <a class="pc-wa" href="https://wa.me/573123042983?text=Hola%2C%20quiero%20cotizar%3A%20Dosificador%201000%20ML%20%28Envases%20e%20Insumos%29" target="_blank" rel="noopener">Cotizar</a>
+        </div>
+      </div>
+    </div>
+<div class="pcard" data-cat="Válvulas y Accesorios">
+      <div class="pc-media"><img src="img/products/bala-de-aluminio-con-valvula-300-ml.jpg" alt="Bala de Aluminio con Válvula 300 ML" loading="lazy"></div>
+      <div class="pc-body">
+        <span class="pc-cat">Válvulas y Accesorios</span>
+        <h3 class="pc-name">Bala de Aluminio con Válvula</h3>
+        <p class="pc-size">300 ML · Caja x300 und</p>
+        <p class="pc-note">Negra · Plata</p>
+        <div class="pc-price-row">
+          <span class="pc-price">$5.200 <span class="price-sep">–</span> $6.300<small>/u</small></span>
+          <a class="pc-wa" href="https://wa.me/573123042983?text=Hola%2C%20quiero%20cotizar%3A%20Bala%20de%20Aluminio%20con%20V%C3%A1lvula%20300%20ML%20%28Envases%20e%20Insumos%29" target="_blank" rel="noopener">Cotizar</a>
+        </div>
+      </div>
+    </div>
+<div class="pcard" data-cat="Válvulas y Accesorios">
+      <div class="pc-media"><img src="img/products/probadores-de-esencias-tiras.jpg" alt="Probadores de Esencias Tiras" loading="lazy"></div>
+      <div class="pc-body">
+        <span class="pc-cat">Válvulas y Accesorios</span>
+        <h3 class="pc-name">Probadores de Esencias</h3>
+        <p class="pc-size">Tiras · Paquete x200 und</p>
+        
+        <div class="pc-price-row">
+          <span class="pc-price">$4.600<small>/u</small></span>
+          <a class="pc-wa" href="https://wa.me/573123042983?text=Hola%2C%20quiero%20cotizar%3A%20Probadores%20de%20Esencias%20Tiras%20%28Envases%20e%20Insumos%29" target="_blank" rel="noopener">Cotizar</a>
+        </div>
+      </div>
+    </div>
+      </div>
+    </section>
+    <section class="cat-section" id="cat-organización-y-empaques">
+      <div class="cat-heading">
+        <span class="cat-icon">🎒</span>
+        <h2>Organización y Empaques</h2>
+        <span class="cat-count">5 referencias</span>
+      </div>
+      <div class="pcard-grid">
+        <div class="pcard" data-cat="Organización y Empaques">
+      <div class="pc-media"><img src="img/products/maletas-de-emprendimiento-1-2-onzas.jpg" alt="Maletas de Emprendimiento 1-2 Onzas" loading="lazy"></div>
+      <div class="pc-body">
+        <span class="pc-cat">Organización y Empaques</span>
+        <h3 class="pc-name">Maletas de Emprendimiento</h3>
+        <p class="pc-size">1-2 Onzas · 20 puestos</p>
+        <p class="pc-note">Cilindro organizador</p>
+        <div class="pc-price-row">
+          <span class="pc-price">$21.300 <span class="price-sep">–</span> $23.550<small>/u</small></span>
+          <a class="pc-wa" href="https://wa.me/573123042983?text=Hola%2C%20quiero%20cotizar%3A%20Maletas%20de%20Emprendimiento%201-2%20Onzas%20%28Envases%20e%20Insumos%29" target="_blank" rel="noopener">Cotizar</a>
+        </div>
+      </div>
+    </div>
+<div class="pcard" data-cat="Organización y Empaques">
+      <div class="pc-media"><img src="img/products/fundas-protectoras-por-color-1-2-oz.jpg" alt="Fundas Protectoras por Color 1-2 Oz" loading="lazy"></div>
+      <div class="pc-body">
+        <span class="pc-cat">Organización y Empaques</span>
+        <h3 class="pc-name">Fundas Protectoras por Color</h3>
+        <p class="pc-size">1-2 Oz · Paquete x50 und</p>
+        <p class="pc-note">Protección y estilo</p>
+        <div class="pc-price-row">
+          <span class="pc-price">$20.100<small>/u</small></span>
+          <a class="pc-wa" href="https://wa.me/573123042983?text=Hola%2C%20quiero%20cotizar%3A%20Fundas%20Protectoras%20por%20Color%201-2%20Oz%20%28Envases%20e%20Insumos%29" target="_blank" rel="noopener">Cotizar</a>
+        </div>
+      </div>
+    </div>
+<div class="pcard" data-cat="Organización y Empaques">
+      <div class="pc-media"><img src="img/products/tira-de-stickers-etiquetas.jpg" alt="Tira de Stickers Etiquetas" loading="lazy"></div>
+      <div class="pc-body">
+        <span class="pc-cat">Organización y Empaques</span>
+        <h3 class="pc-name">Tira de Stickers</h3>
+        <p class="pc-size">Etiquetas · Tira x10 und</p>
+        <p class="pc-note">Mínimo 2 tiras por referencia</p>
+        <div class="pc-price-row">
+          <span class="pc-price">$350 <span class="price-sep">–</span> $700<small>/u</small></span>
+          <a class="pc-wa" href="https://wa.me/573123042983?text=Hola%2C%20quiero%20cotizar%3A%20Tira%20de%20Stickers%20Etiquetas%20%28Envases%20e%20Insumos%29" target="_blank" rel="noopener">Cotizar</a>
+        </div>
+      </div>
+    </div>
+<div class="pcard" data-cat="Organización y Empaques">
+      <div class="pc-media"><img src="img/products/organizadores-para-muestras-24-40-60-puestos.jpg" alt="Organizadores para Muestras 24 / 40 / 60 puestos" loading="lazy"></div>
+      <div class="pc-body">
+        <span class="pc-cat">Organización y Empaques</span>
+        <h3 class="pc-name">Organizadores para Muestras</h3>
+        <p class="pc-size">24 / 40 / 60 puestos · Pensprayer / Rollon</p>
+        
+        <div class="pc-price-row">
+          <span class="pc-price">$11.500 <span class="price-sep">–</span> $21.300<small>/u</small></span>
+          <a class="pc-wa" href="https://wa.me/573123042983?text=Hola%2C%20quiero%20cotizar%3A%20Organizadores%20para%20Muestras%2024%20/%2040%20/%2060%20puestos%20%28Envases%20e%20Insumos%29" target="_blank" rel="noopener">Cotizar</a>
+        </div>
+      </div>
+    </div>
+<div class="pcard" data-cat="Organización y Empaques">
+      <div class="pc-media"><img src="img/products/gramera-digital-precision.jpg" alt="Gramera Digital Precisión" loading="lazy"></div>
+      <div class="pc-body">
+        <span class="pc-cat">Organización y Empaques</span>
+        <h3 class="pc-name">Gramera Digital</h3>
+        <p class="pc-size">Precisión · Por unidad</p>
+        <p class="pc-note">Pantalla LCD</p>
+        <div class="pc-price-row">
+          <span class="pc-price">$40.250<small>/u</small></span>
+          <a class="pc-wa" href="https://wa.me/573123042983?text=Hola%2C%20quiero%20cotizar%3A%20Gramera%20Digital%20Precisi%C3%B3n%20%28Envases%20e%20Insumos%29" target="_blank" rel="noopener">Cotizar</a>
+        </div>
+      </div>
+    </div>
+      </div>
+    </section>
+    <section class="cat-section" id="cat-materias-primas">
+      <div class="cat-heading">
+        <span class="cat-icon">🧪</span>
+        <h2>Materias Primas</h2>
+        <span class="cat-count">3 referencias</span>
+      </div>
+      <div class="pcard-grid">
+        <div class="pcard" data-cat="Materias Primas">
+      <div class="pc-media"><img src="img/products/alcohol-extra-neutro-96.jpg" alt="Alcohol Extra Neutro 96%" loading="lazy"></div>
+      <div class="pc-body">
+        <span class="pc-cat">Materias Primas</span>
+        <h3 class="pc-name">Alcohol Extra Neutro 96%</h3>
+        <p class="pc-size">1L / 5L / 20L / 200L · Por unidad</p>
+        <p class="pc-note">De maíz · Alta pureza. Precio según presentación.</p>
+        <div class="pc-price-row">
+          <span class="pc-price">$11.500 <span class="price-sep">–</span> $1.380.000<small>/u</small></span>
+          <a class="pc-wa" href="https://wa.me/573123042983?text=Hola%2C%20quiero%20cotizar%3A%20Alcohol%20Extra%20Neutro%2096%25%201L%20/%205L%20/%2020L%20/%20200L%20%28Envases%20e%20Insumos%29" target="_blank" rel="noopener">Cotizar</a>
+        </div>
+      </div>
+    </div>
+<div class="pcard" data-cat="Materias Primas">
+      <div class="pc-media"><img src="img/products/fijador-dpg-grado-fragancia.jpg" alt="Fijador DPG Grado Fragancia" loading="lazy"></div>
+      <div class="pc-body">
+        <span class="pc-cat">Materias Primas</span>
+        <h3 class="pc-name">Fijador DPG Grado Fragancia</h3>
+        <p class="pc-size">500GR / 1KG / 5KG · Por unidad</p>
+        <p class="pc-note">Aumenta la fijación y proyección</p>
+        <div class="pc-price-row">
+          <span class="pc-price">$23.000 <span class="price-sep">–</span> $207.000<small>/u</small></span>
+          <a class="pc-wa" href="https://wa.me/573123042983?text=Hola%2C%20quiero%20cotizar%3A%20Fijador%20DPG%20Grado%20Fragancia%20500GR%20/%201KG%20/%205KG%20%28Envases%20e%20Insumos%29" target="_blank" rel="noopener">Cotizar</a>
+        </div>
+      </div>
+    </div>
+<div class="pcard" data-cat="Materias Primas">
+      <div class="pc-media"><img src="img/products/feromonas-base.jpg" alt="Feromonas Base" loading="lazy"></div>
+      <div class="pc-body">
+        <span class="pc-cat">Materias Primas</span>
+        <h3 class="pc-name">Feromonas Base</h3>
+        <p class="pc-size">500GR / 1KG · Por unidad</p>
+        <p class="pc-note">Esencia base de alta calidad</p>
+        <div class="pc-price-row">
+          <span class="pc-price">$34.500 <span class="price-sep">–</span> $63.250<small>/u</small></span>
+          <a class="pc-wa" href="https://wa.me/573123042983?text=Hola%2C%20quiero%20cotizar%3A%20Feromonas%20Base%20500GR%20/%201KG%20%28Envases%20e%20Insumos%29" target="_blank" rel="noopener">Cotizar</a>
+        </div>
+      </div>
+    </div>
+      </div>
+    </section>
+</div>
+
+<a class="floating-wa" href="https://wa.me/573123042983?text=Hola%2C%20quiero%20info%20del%20cat%C3%A1logo%20de%20Envases%20e%20Insumos" target="_blank" rel="noopener">💬</a>
+
+<footer>
+  <p>© 2026 Trivino Parfums · Catálogo mayorista de envases e insumos</p>
+  <p style="margin-top:8px">Pedidos por WhatsApp: <a href="https://wa.me/573123042983">+57 312 304 2983</a></p>
+</footer>
+
+<script>
+document.querySelectorAll('.filter-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const f = btn.dataset.filter;
+    document.querySelectorAll('.cat-section').forEach(sec=>{
+      const cat = sec.querySelector('.pcard').dataset.cat;
+      sec.style.display = (f==='all' || f===cat) ? '' : 'none';
+    });
+  });
+});
+</script>
+</body>
+</html>
